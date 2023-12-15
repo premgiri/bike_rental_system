@@ -36,8 +36,8 @@ export class AdminDashboardComponent {
     this.chartOptions = {
       series: [
         {
-          name: "Servings",
-          data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35]
+          name: "No. of users",
+          data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35, 40, 20]
         }
       ],
       annotations: {
@@ -52,7 +52,7 @@ export class AdminDashboardComponent {
                 color: "#fff",
                 background: "#775DD0"
               },
-              text: "Bananas are good"
+              // text: "Bananas are good"
             }
           }
         ]
@@ -84,25 +84,28 @@ export class AdminDashboardComponent {
           rotate: -45
         },
         categories: [
-          "Apples",
-          "Oranges",
-          "Strawberries",
-          "Pineapples",
-          "Mangoes",
-          "Bananas",
-          "Blackberries",
-          "Pears",
-          "Watermelons",
-          "Cherries",
-          "Pomegranates",
-          "Tangerines",
-          "Papayas"
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
+          "20-10-2023",
         ],
         tickPlacement: "on"
       },
       yaxis: {
         title: {
-          text: "Servings"
+          text: "No. of users"
         }
       },
       fill: {

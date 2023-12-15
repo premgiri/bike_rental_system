@@ -7,13 +7,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { BikesListComponent } from './bikes-list/bikes-list.component';
 import { AddBikeComponent } from './add-bike/add-bike.component';
+import { IconsProviderModule } from 'src/app/icons-provider.module';
 
 @NgModule({
   imports: [
     SharedModule,
     HttpClientModule,
     ManageBikesRoutingModule,    
-    CommonModule
+    CommonModule,
+    IconsProviderModule
   ],
   declarations: [
     BikesListComponent,

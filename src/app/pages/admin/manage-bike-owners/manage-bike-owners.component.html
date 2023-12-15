@@ -1,1 +1,91 @@
-<p>manage-bike-owners works!</p>
+<nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th *ngFor="let column of listOfColumn">
+          {{ column.title }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of sortTable.data">
+        <td>{{ data.firstName }}</td>
+        <td>{{ data.lastName }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.phoneNumber }}</td>
+        <td>{{ data.dob }}</td>
+        <td>{{ data.gender }}</td>
+        <td><nz-tag [nzColor]="data.status == 'Active' ? '#87d068' :'#f50'">{{ data.status }}</nz-tag>
+        </td>
+        <td><a nz-button nzType="link" (click)="showModal()"><span nz-icon nzType="edit" nzTheme="outline"></span>Edit</a> </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit Bike Owner Details" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"  [nzStyle]="{ top: '20px' }" [nzWidth]="'800px'">
+    <ng-container *nzModalContent>
+        <form>
+            <div class="row">
+                <div class="col-lg-4">
+                    <nz-form-item>
+                      <nz-form-label nzFor="firstName">First Name</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input name="firstName" id="firstName" disabled>
+                      </nz-form-control>
+                    </nz-form-item >
+                </div>
+                <div class="col-lg-4">
+                    <nz-form-item>
+                      <nz-form-label nzFor="lastName">Last Name</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input name="lastName" id="lastName" disabled>
+                      </nz-form-control>
+                    </nz-form-item >
+                </div>
+                <div class="col-lg-4">
+                    <nz-form-item>
+                      <nz-form-label nzFor="email">Email</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input name="email" id="email" disabled>
+                      </nz-form-control>
+                    </nz-form-item >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <nz-form-item>
+                      <nz-form-label nzFor="phoneNumber">Phone Number</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input name="phoneNumber" id="phoneNumber" disabled>
+                      </nz-form-control>
+                    </nz-form-item >
+                </div>
+                <div class="col-lg-4">
+                    <nz-form-item>
+                      <nz-form-label nzFor="dob">Date Of Birth</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input name="dob" id="dob" disabled>
+                      </nz-form-control>
+                    </nz-form-item >
+                </div>
+                <div class="col-lg-4">
+                    <nz-form-item>
+                      <nz-form-label nzFor="gender">Gender</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input name="gender" id="gender" disabled>
+                      </nz-form-control>
+                    </nz-form-item >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <nz-form-item>
+                      <nz-form-label nzFor="status">Status</nz-form-label>
+                      <nz-form-control>
+                        <input nz-input name="status" id="status">
+                      </nz-form-control>
+                    </nz-form-item >
+                </div>
+            </div>
+          </form>
+    </ng-container>
+  </nz-modal>

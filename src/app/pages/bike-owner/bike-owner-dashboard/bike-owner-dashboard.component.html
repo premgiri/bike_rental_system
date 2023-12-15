@@ -1,8 +1,47 @@
-<nz-row [nzGutter]="16">
-    <nz-col [nzSpan]="12">
-      <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'Total books'"></nz-statistic>
+<nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="8">
+      <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'Total bikes added'"></nz-statistic>
     </nz-col>
-    <nz-col [nzSpan]="12">
-      <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Rides books'"></nz-statistic>
+    <nz-col [nzSpan]="8">
+      <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Rides amount'"></nz-statistic>
     </nz-col>
-  </nz-row>
+    <nz-col [nzSpan]="8">
+      <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Pending rides'"></nz-statistic>
+    </nz-col>
+</nz-row>
+
+
+<nz-row [nzGutter]="24">
+  <nz-col [nzSpan]="12">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [yaxis]="chartOptions.yaxis"
+        [xaxis]="chartOptions.xaxis"
+        [stroke]="chartOptions.stroke"
+        [grid]="chartOptions.grid"
+        [fill]="chartOptions.fill"
+        [annotations]="chartOptions.annotations"
+      ></apx-chart>
+    </div>
+  </nz-col>
+  <nz-col [nzSpan]="12">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [yaxis]="chartOptions.yaxis"
+        [xaxis]="chartOptions.xaxis"
+        [stroke]="chartOptions.stroke"
+        [grid]="chartOptions.grid"
+        [fill]="chartOptions.fill"
+        [annotations]="chartOptions.annotations"
+      ></apx-chart>
+    </div>
+  </nz-col>
+</nz-row>

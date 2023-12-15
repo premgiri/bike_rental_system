@@ -1,1 +1,59 @@
-<p>bikes-list works!</p>
+<nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="12">
+        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis]">
+            <nz-card-meta
+              [nzDescription]="cardContent"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #cardContent>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="8">
+                    <p>Bike Name:</p>
+                </nz-col>
+                <nz-col [nzSpan]="12">
+                    <p>Benz</p>
+                </nz-col>
+            </nz-row>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="8">
+                    <p>Bike Name:</p>
+                </nz-col>
+                <nz-col [nzSpan]="12">
+                    <p>Benz</p>
+                </nz-col>
+            </nz-row>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="8">
+                    <p>Registration Number:</p>
+                </nz-col>
+                <nz-col [nzSpan]="12">
+                    <p>TS120F7725</p>
+                </nz-col>
+            </nz-row>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="8">
+                    <p>Price Per Day:</p>
+                </nz-col>
+                <nz-col [nzSpan]="12">
+                    <p>100$</p>
+                </nz-col>
+            </nz-row>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="8">
+                    <p>Status:</p>
+                </nz-col>
+                <nz-col [nzSpan]="12">
+                    <p>Active</p>
+                </nz-col>
+            </nz-row>
+          </ng-template>
+          <ng-template #actionEllipsis>
+            <button nz-button nzType="primary">Previous Rides</button>
+          </ng-template>
+          <ng-template #coverTemplate>
+            <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+          </ng-template>
+    </nz-col>
+</nz-row>
+
+  

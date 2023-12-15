@@ -8,8 +8,8 @@
   </nz-row>
 
 
-  <div class="row">
-    <div class="col-lg-6">
+  <nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="12">
       <div id="chart">
         <apx-chart
           [series]="chartOptions.series"
@@ -24,8 +24,8 @@
           [annotations]="chartOptions.annotations"
         ></apx-chart>
       </div>
-    </div>
-    <div class="col-lg-6">
+    </nz-col>
+    <nz-col [nzSpan]="12">
       <div id="chart">
         <apx-chart
           [series]="chartOptions.series"
@@ -40,5 +40,5 @@
           [annotations]="chartOptions.annotations"
         ></apx-chart>
       </div>
-    </div>
-  </div>
+    </nz-col>
+  </nz-row>
