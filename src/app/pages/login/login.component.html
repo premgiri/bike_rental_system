@@ -1,0 +1,59 @@
+<div class="justify-content-center" id="login-page" style="overflow-x: hidden">
+    <div class="col-xl-12 col-lg-12 col-md-12">
+      <div class="o-hidden">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8 d-none d-lg-block bg-login-image">
+              <img style="width: 70vw; height: 100vh" src="../../../assets/images/loginbike.JPEG" />
+            </div>
+            <div class="col-lg-4 col-lg-offset-1" style="margin-top: 20px">
+              <div class="p-5">
+                <div>
+                  <div class="text-center loginlogo logoOnHover">
+                    <img src="../../../assets/images/bikelogo.jpeg" id="hirelyticLogo" alt="Organisation Logo" class="companylogo" />
+                  </div>
+                </div>
+                <form class="mt-5">
+                  <!-- <button class="btn btn-primary btn-block">Sign In with PruTech India</button> -->
+                  <!-- <button class="btn btn-primary btn-block">Sign In with PruTech US</button> -->
+                  <!-- <hr> -->
+                  <div class="d-grid gap-2 col-10 mx-auto">
+                    <form nz-form class="login-form">
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please input your username!">
+                            <nz-input-group nzPrefixIcon="user">
+                              <input type="text" nz-input placeholder="Username" />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Please input your Password!">
+                            <nz-input-group nzPrefixIcon="lock">
+                              <input type="password" nz-input placeholder="Password" />
+                            </nz-input-group>
+                          </nz-form-control>
+                        </nz-form-item>
+                        <div nz-row class="login-form-margin">
+                          <div nz-col [nzSpan]="12">
+                            <label nz-checkbox>
+                              <span>Show password</span>
+                            </label>
+                          </div>
+                          <div nz-col [nzSpan]="12">
+                            <a class="login-form-forgot">Forgot password</a>
+                          </div>
+                        </div>
+                        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [routerLink]="'/admin-dashboard'">Log in</button>
+                        Or
+                        <a nz-button nzType="link">register now!</a>
+                      </form>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

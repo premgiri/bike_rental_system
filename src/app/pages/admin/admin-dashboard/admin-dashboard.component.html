@@ -1,0 +1,44 @@
+<nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="12">
+      <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'Users'"></nz-statistic>
+    </nz-col>
+    <nz-col [nzSpan]="12">
+      <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Bike owners'"></nz-statistic>
+    </nz-col>
+  </nz-row>
+
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [dataLabels]="chartOptions.dataLabels"
+          [plotOptions]="chartOptions.plotOptions"
+          [yaxis]="chartOptions.yaxis"
+          [xaxis]="chartOptions.xaxis"
+          [stroke]="chartOptions.stroke"
+          [grid]="chartOptions.grid"
+          [fill]="chartOptions.fill"
+          [annotations]="chartOptions.annotations"
+        ></apx-chart>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [dataLabels]="chartOptions.dataLabels"
+          [plotOptions]="chartOptions.plotOptions"
+          [yaxis]="chartOptions.yaxis"
+          [xaxis]="chartOptions.xaxis"
+          [stroke]="chartOptions.stroke"
+          [grid]="chartOptions.grid"
+          [fill]="chartOptions.fill"
+          [annotations]="chartOptions.annotations"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,83 @@
+<nz-layout class="app-layout">
+    <nz-sider class="menu-sidebar"
+              nzCollapsible
+              nzWidth="256px"
+              nzBreakpoint="md"
+              [(nzCollapsed)]="isCollapsed"
+              [nzTrigger]="null">
+      <div class="sidebar-logo">
+        <a href="https://ng.ant.design/" target="_blank">
+          <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+          <h1>Bike Rental System</h1>
+        </a>
+      </div>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <ng-container *ngFor="let item of menuItems">
+          <li
+            *ngIf="!item.subMenu || item.subMenu.length === 0; else hasSubMenu"
+            nz-menu-item
+            nzMatchRouter
+            [routerLink]="item.path"
+          >
+            <span class="pt-2" nz-icon [nzType]="item.icon" nzTheme="outline" class="menuIcon"></span>
+            <span class="name">{{ item.name }}</span>
+          </li>
+          <ng-template #hasSubMenu>
+            <li nz-submenu [nzTitle]="item.name" [nzIcon]="item.icon">
+              <ul nz-menu nzTheme="dark">
+                <li nz-menu-item nzMatchRouter *ngFor="let subItem of item.subMenu" [routerLink]="subItem.path">
+                  <span class="pt-2" nz-icon [nzType]="subItem.icon" nzTheme="outline"></span>
+                  <span class="name">{{ subItem.name }}</span>
+                </li>
+              </ul>
+            </li>
+          </ng-template>
+        </ng-container>
+      </ul>
+      <!-- <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/welcome">Welcome</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a>Monitor</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a>Workplace</a>
+            </li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a>Basic Form</a>
+            </li>
+          </ul>
+        </li>
+      </ul> -->
+    </nz-sider>
+    <nz-layout>
+      <nz-header>
+        <div class="app-header">
+          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+              <span class="trigger"
+                 nz-icon
+                 [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+              ></span>
+          </span>
+        </div>
+      </nz-header>
+      <nz-content>
+        <!-- <nz-breadcrumb>
+          <nz-breadcrumb-item>User</nz-breadcrumb-item>
+          <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+        </nz-breadcrumb> -->
+        <nz-breadcrumb [nzAutoGenerate]="true" [nzRouteLabel]="'breadcrumb'" nzSeparator=">"></nz-breadcrumb>
+        <div class="inner-content">
+            <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+  

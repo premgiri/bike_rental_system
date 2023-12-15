@@ -1,0 +1,41 @@
+.logoOnHover:hover {
+    cursor: pointer;
+  }
+  .centerAlignedContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .loginlogo img {
+    width: auto;
+    height: 90px;
+  }
+  
+  .loginlogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #login-page {
+    overflow-x: none !important;
+  }
+  
+
+  //////Login Form
+  
+  .login-form {
+    max-width: 300px;
+  }
+
+  .login-form-margin {
+    margin-bottom: 16px;
+  }
+
+  .login-form-forgot {
+    float: right;
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
