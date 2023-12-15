@@ -1,1 +1,1 @@
-# bike_rental_system by @prem_giri
+# bike_rental_system developed & designed by @prem_giri
