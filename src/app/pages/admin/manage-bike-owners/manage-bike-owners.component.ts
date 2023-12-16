@@ -16,6 +16,7 @@ interface DataItem {
 })
 export class ManageBikeOwnersComponent {
   isVisible = false;
+  selectedValue = null;
   listOfColumn = [
     {
       title: 'First Name',

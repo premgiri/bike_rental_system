@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LayoutComponent implements OnInit{
   isCollapsed = true;
   menuItems:any;
+  visible: boolean = false;
 
   ngOnInit(): void {
     this.menuItems = [
@@ -68,6 +69,9 @@ export class LayoutComponent implements OnInit{
         icon: 'file-done',
       },
     ];
+  }
+  change(value: boolean): void {
+    console.log(value);
   }
 
 

@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BikesListComponent } from './bikes-list/bikes-list.component';
 import { AddBikeComponent } from './add-bike/add-bike.component';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { PreviousRidesComponent } from './bikes-list/previous-rides/previous-rides.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { IconsProviderModule } from 'src/app/icons-provider.module';
   ],
   declarations: [
     BikesListComponent,
-    AddBikeComponent
+    AddBikeComponent,
+    PreviousRidesComponent
   ],
   exports: []
 })

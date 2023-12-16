@@ -18,7 +18,7 @@
   
   .header-trigger {
     height: 64px;
-    padding: 20px 24px;
+    padding: 0 24px;
     font-size: 20px;
     cursor: pointer;
     transition: all .3s,padding 0s;
@@ -85,3 +85,47 @@
     margin: 0 0 16px 0;
   }
   
+
+  ///Header profile dropdown 
+  
+.app-name {
+  color: #001529;
+}
+
+i {
+  cursor: pointer;
+  margin-top: 2px;
+}
+.profile-header-title {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 0;
+  font-weight: 500;
+  color: #555;
+  line-height: 10px;
+}
+
+.profile-header-title span {
+  font-size: 14px;
+  color: #696969;
+  font-weight: 300;
+}
+
+.profile-items li {
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+.profile-items li:hover {
+  color: #1890ff;
+  cursor: pointer;
+}
+.profile-items li span {
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+  transition: 0.5s;
+  // margin-top: 8px;
+}

@@ -1,1 +1,383 @@
-<p>profile-details works!</p>
+<div class="container">
+    <div class="row flex-lg-nowrap">
+      <!-- <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+          <div class="card p-3">
+            <div class="e-navlist e-navlist--active-bg">
+              <ul class="nav">
+                <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+  
+      <div class="col">
+        <div class="row">
+          <div class="col mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="e-profile">
+                  <div class="row">
+                    <div class="col-lg-3 col-sm-auto mb-3">
+                      <nz-avatar [nzShape]="'square'" [nzSize]="150" [nzIcon]="'user'"></nz-avatar>
+  
+                      <!-- <nz-upload
+                        class="avatar-uploader"
+                        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        nzName="avatar"
+                        nzListType="picture-card"
+                        [nzShowUploadList]="false"
+                        [nzBeforeUpload]="beforeUpload"
+                        (nzChange)="handleChange($event)"
+                      >
+                        <ng-container *ngIf="!avatarUrl">
+                          <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                          <div class="ant-upload-text">Upload</div>
+                        </ng-container>
+                        <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+                      </nz-upload> -->
+                    </div>
+                    <div class="col-lg-3">
+                      <h4>Prem Giri</h4>
+                      <p class="mb-0">prem@prutech.com</p>
+                      <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                      <div class="mt-2">
+                        <button nz-button nzType="primary" (click)="showModal()">
+                          <span nz-icon nzType="camera" nzTheme="outline"></span>
+                          Change Photo
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="d-flex justify-content-end">
+                        <div>
+                          <nz-tag [nzColor]="'grey'">administrator</nz-tag>
+                          <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                        </div>
+                        <!-- <div class="text-center text-sm-left mb-2 mb-sm-0">
+                          <h4>Prem Giri</h4>
+                          <p class="mb-0">prem@prutech.com</p>
+                          <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                          <div class="mt-2">
+                            <button nz-button nzType="primary" (click)="showModal()">
+                              <span nz-icon nzType="camera" nzTheme="outline"></span>                          
+                              Change Photo
+                            </button>
+                          </div>
+                        </div> -->
+                        <!-- <div class="text-center text-sm-right">
+                          <nz-tag [nzColor]="'grey'">administrator</nz-tag>
+                          <span class="badge badge-secondary">administrator</span>
+                          <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <nz-tabset nzType="card">
+                    <nz-tab nzTitle="Profile">
+                      <form>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <nz-form-item>
+                              <nz-form-label nzFor="fullName">Fist Name</nz-form-label>
+                              <input nz-input />
+                            </nz-form-item>
+                          </div>
+                          <div class="col-lg-4">
+                            <nz-form-item>
+                              <nz-form-label nzFor="email">Middle Name</nz-form-label>
+                              <input nz-input />
+                            </nz-form-item>
+                          </div>
+                          <div class="col-lg-4">
+                            <nz-form-item>
+                              <nz-form-label nzFor="email">Last Name</nz-form-label>
+                              <input nz-input />
+                            </nz-form-item>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="fullName">Email</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="email">Phone Number</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="email">Alternate Phone Number</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="fullName">Gender</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-control>
+                                    <nz-form-label>Date Of Birth</nz-form-label>
+                                    <p>
+                                    <nz-date-picker nz-input nzFormat="dd-MM-yyyy" nzPlaceHolder="Select Date" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+                                    <!-- <input nz-input /> -->
+                                </p>
+                                </nz-form-control>
+                              </nz-form-item>
+                            </div>
+                            <!-- <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="email">Last Name</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div> -->
+                          </div>
+                          <b><nz-divider nzText="Address" nzOrientation="center"></nz-divider></b>
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="fullName">Address Line1</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="email">Address Line2</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-4">
+                                <nz-form-item>
+                                  <nz-form-label nzFor="email">Country</nz-form-label>
+                                  <input nz-input />
+                                </nz-form-item>
+                              </div>
+                            <!-- <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="email">Last Name</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div> -->
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="fullName">State</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="email">City</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div>
+                            <div class="col-lg-4">
+                                <nz-form-item>
+                                  <nz-form-label nzFor="email">Zip Code</nz-form-label>
+                                  <input nz-input />
+                                </nz-form-item>
+                              </div>
+                            <!-- <div class="col-lg-4">
+                              <nz-form-item>
+                                <nz-form-label nzFor="email">Last Name</nz-form-label>
+                                <input nz-input />
+                              </nz-form-item>
+                            </div> -->
+                          </div>
+                          
+                        <!-- <div class="row">
+                                    <div class="col mb-3">
+                                      <div class="form-group">
+                                        <label>About</label>
+                                        <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
+                                      </div>
+                                    </div>
+                                  </div> -->
+                        <!-- <div class="row">
+                                <div class="col-12 col-sm-6 mb-3">
+                                  <div class="mb-2"><b>Change Password</b></div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="form-group">
+                                        <label>Current Password</label>
+                                        <input class="form-control" type="password" placeholder="••••••">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="form-group">
+                                        <label>New Password</label>
+                                        <input class="form-control" type="password" placeholder="••••••">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="form-group">
+                                        <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
+                                        <input class="form-control" type="password" placeholder="••••••"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                                  <div class="mb-2"><b>Keeping in Touch</b></div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <label>Email Notifications</label>
+                                      <div class="custom-controls-stacked px-2">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
+                                          <label class="custom-control-label" for="notifications-blog">Blog posts</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
+                                          <label class="custom-control-label" for="notifications-news">Newsletter</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
+                                          <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div> -->
+                        <div class="row">
+                          <div class="col d-flex justify-content-end">
+                            <button nz-button nzType="primary">Save Changes</button>
+                          </div>
+                        </div>
+                      </form>
+                    </nz-tab>
+                    <!-- <nz-tab nzTitle="About">
+                      <div class="row">
+                        <div class="col">
+                          <nz-form-label>About</nz-form-label>
+                          <nz-form-item>
+                            <nz-form-control>
+                              <nz-textarea-count [nzMaxCharacterCount]="100">
+                                <textarea rows="4" formControlName="about" placeholder="My Bio" nz-input></textarea>
+                              </nz-textarea-count>
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                    </nz-tab> -->
+                    <nz-tab nzTitle="Change Password">
+                      <div class="row justify-content-center mb-2">
+                        <div class="col-lg-6">
+                          <nz-form-label>Enter Current Password</nz-form-label>
+                          <nz-input-group [nzSuffix]="currentSuffixTemplate" nzPrefixIcon="lock">
+                            <input [type]="currentPasswordVisible ? 'text' : 'password'" nz-input placeholder="enter current password" />
+                          </nz-input-group>
+                          <ng-template #currentSuffixTemplate>
+                            <i
+                              nz-icon
+                              [nzType]="currentPasswordVisible ? 'eye' : 'eye-invisible'"
+                              (click)="currentPasswordVisible = !currentPasswordVisible"
+                            ></i>
+                          </ng-template>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center mb-2">
+                        <div class="col-lg-6">
+                          <div>
+                            <nz-form-label>Enter New Password</nz-form-label>
+                            <nz-input-group [nzSuffix]="newSuffixTemplate" nzPrefixIcon="lock">
+                              <input [type]="newPasswordVisible ? 'text' : 'password'" nz-input placeholder="enter new password" />
+                            </nz-input-group>
+                            <ng-template #newSuffixTemplate>
+                              <i
+                                nz-icon
+                                [nzType]="newPasswordVisible ? 'eye' : 'eye-invisible'"
+                                (click)="newPasswordVisible = !newPasswordVisible"
+                              ></i>
+                            </ng-template>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                          <nz-form-label>Confirm Password</nz-form-label>
+                          <nz-input-group [nzSuffix]="confirmSuffixTemplate" nzPrefixIcon="lock">
+                            <input [type]="confirmPasswordVisible ? 'text' : 'password'" nz-input placeholder="confirm new password" />
+                          </nz-input-group>
+                          <ng-template #confirmSuffixTemplate>
+                            <i
+                              nz-icon
+                              [nzType]="confirmPasswordVisible ? 'eye' : 'eye-invisible'"
+                              (click)="confirmPasswordVisible = !confirmPasswordVisible"
+                            ></i>
+                          </ng-template>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col d-flex justify-content-end">
+                          <button nz-button nzType="primary">Change Password</button>
+                        </div>
+                      </div>
+                    </nz-tab>
+                    <!-- <nz-tab nzTitle="Setting"> </nz-tab> -->
+                  </nz-tabset>
+                  <!-- <ul class="nav nav-tabs">
+                      <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                    </ul> -->
+                </div>
+              </div>
+            </div>
+  
+            <!-- <div class="col-12 col-md-3 mb-3">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="px-xl-3">
+                    <button class="btn btn-block btn-secondary">
+                      <i class="fa fa-sign-out"></i>
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title font-weight-bold">Support</h6>
+                  <p class="card-text">Get fast, free help from our friendly assistants.</p>
+                  <button type="button" class="btn btn-primary">Contact Us</button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Update profile picture" nzOkText="Save" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <nz-upload
+          nzType="drag"
+          [nzMultiple]="false"
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          (nzChange)="handleChange($event)"
+        >
+          <p class="ant-upload-drag-icon">
+            <span nz-icon nzType="inbox"></span>
+          </p>
+          <p class="ant-upload-text">Click or drag file to this area to upload</p>
+          <p class="ant-upload-hint">(Maximum image size - 20MB)</p>
+        </nz-upload>
+      </ng-container>
+    </nz-modal>
+  </div>
+  

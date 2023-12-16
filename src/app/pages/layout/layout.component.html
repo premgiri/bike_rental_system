@@ -59,13 +59,34 @@
     </nz-sider>
     <nz-layout>
       <nz-header>
-        <div class="app-header">
+        <div class="app-header d-flex justify-content-between">
           <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
               <span class="trigger"
                  nz-icon
                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
               ></span>
           </span>
+          <span
+          nz-dropdown
+          nz-popover
+          [(nzPopoverVisible)]="visible"
+          (nzPopoverVisibleChange)="change($event)"
+          nzPopoverTrigger="click"
+          [nzPopoverContent]="contentTemplate"
+          nzPopoverPlacement="bottomRight"
+          style="margin-right: 10px; cursor: pointer"
+        >
+          <span style="margin-right: 8px; color: #1890ff"
+            >Prem Giri<span nz-icon nzType="down" nzTheme="outline" style="margin-left: 12px; font-size: 10px"></span>
+          </span>
+          <nz-avatar style="background-color: #ff9800" [nzText]="'PG'" [nzSize]="32"></nz-avatar>
+          <ng-template #contentTemplate>
+            <div class="profile-items">
+              <li [routerLink]="'/profile-details'"><span nz-icon nzType="user" nzTheme="outline"></span>User Profile</li>
+              <li><span nz-icon nzType="logout" nzTheme="outline"></span>Logout</li>
+            </div>
+          </ng-template>
+        </span>
         </div>
       </nz-header>
       <nz-content>
