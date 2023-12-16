@@ -16,40 +16,20 @@
         <td>{{ data.gender }}</td>
         <td><nz-tag [nzColor]="data.status == 'Active' ? '#87d068' :'#f50'">{{ data.status }}</nz-tag>
         </td>
-        <td><a nz-button nzType="link" (click)="showModal()"><span nz-icon nzType="edit" nzTheme="outline"></span>Edit</a> </td>
+        <td><a nz-button nzType="link" (click)="showModal()"><span nz-icon nzType="edit" nzTheme="outline"></span>Update</a> </td>
       </tr>
     </tbody>
   </nz-table>
 
-  <nz-modal [(nzVisible)]="isVisible" nzTitle="Bike Owner Details" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="'800px'">
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Bike Owner Details" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="'400px'">
     <ng-container *nzModalContent>
         <form>
             <div>
-              <div class="row">
-                <div class="col-lg-4">
+              <div class="row d-flex justify-content-center">
+                <div class="col-lg-10">
                   <div class="row">
                     <div class="col-lg-6">
-                      <label nzFor="firstName">First Name:</label>
-                    </div>
-                    <div class="col-lg-6">
-                      <span>Prem</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label nzFor="firstName">Middle Name:</label>
-                    </div>
-                    <div class="col-lg-6">
-                    <span>Prem</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label nzFor="firstName">Lst Name:</label>
+                      <label nzFor="firstName">Full Name:</label>
                     </div>
                     <div class="col-lg-6">
                       <span>Prem</span>
@@ -57,10 +37,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <div class="row mt-4">
-                <div class="col-lg-4">
+              <div class="row d-flex justify-content-center mt-3">
+                <div class="col-lg-10">
                   <div class="row">
                     <div class="col-lg-6">
                       <label nzFor="firstName">Email:</label>
@@ -68,9 +46,11 @@
                     <div class="col-lg-6">
                       <span>Prem</span>
                     </div>
-                  </div>                
+                  </div>  
                 </div>
-                <div class="col-lg-4">
+              </div>
+              <div class="row d-flex justify-content-center mt-3">
+                <div class="col-lg-10">
                   <div class="row">
                     <div class="col-lg-6">
                       <label nzFor="firstName">Phone Number:</label>
@@ -79,56 +59,30 @@
                       <span>Prem</span>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label nzFor="firstName">Date Of Birth:</label>
-
-                    </div>
-                    <div class="col-lg-6">
-                      <span>Giri</span>
-
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
-              <div class="row mt-4">
-                <div class="col-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label nzFor="firstName">Gender:</label>
-                    </div>
-                    <div class="col-lg-6">
-                      <span>Prem</span>
-                    </div>
+            <div class="row d-flex justify-content-center mt-3">
+              <div class="col-lg-10">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label nzFor="dob">Status:</label>
                   </div>
-                  <nz-form-item>
-                  </nz-form-item>                  
-                </div>
-                <div class="col-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label nzFor="dob">Status:</label>
-                    </div>
-                    <div class="col-lg-6">
-                      <nz-form-item>
-                        <nz-form-control>
-                         <!-- <nz-form-control>
-                            <input nz-input name="dob" id="dob">
-                          </nz-form-control> -->
-                          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" [(ngModel)]="selectedValue" name="status" id="status">
-                            <nz-option nzLabel="Active" nzValue="Active"></nz-option>
-                            <nz-option nzLabel="Inactive" nzValue="Inactive"></nz-option>
-                          </nz-select>
-                          </nz-form-control>
-                      </nz-form-item >
-                    </div>
+                  <div class="col-lg-6">
+                    <nz-form-item>
+                      <nz-form-control>
+                       <!-- <nz-form-control>
+                          <input nz-input name="dob" id="dob">
+                        </nz-form-control> -->
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" [(ngModel)]="selectedValue" name="status" id="status">
+                          <nz-option nzLabel="Active" nzValue="Active"></nz-option>
+                          <nz-option nzLabel="Inactive" nzValue="Inactive"></nz-option>
+                        </nz-select>
+                        </nz-form-control>
+                    </nz-form-item >
                   </div>
-                  <nz-form-item>
-                  </nz-form-item>                  
                 </div>
+            </div>
+          </div>
               </div>
           </form>
     </ng-container>
