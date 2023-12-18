@@ -1,1 +1,91 @@
-<p>current-bookings works!</p>
+<nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="12">
+        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisReject]">
+            <nz-card-meta
+              [nzDescription]="cardContent"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #cardContent>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="24">
+                    <nz-row [nzGutter]="12">
+                        <nz-col [nzSpan]="8">
+                            <p>Bike Name:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="12">
+                        <nz-col [nzSpan]="8">
+                            <p>Registration Number:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>TS120F7725</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="12">
+                        <nz-col [nzSpan]="8">
+                            <p>Price Per Day:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>100$</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-divider nzPlain nzText="Rider Details"></nz-divider>
+                    <nz-row [nzGutter]="24">
+                        <nz-col [nzSpan]="8">
+                            <p>Start Date:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="24">
+                        <nz-col [nzSpan]="8">
+                            <p>End Date:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="24">
+                        <nz-col [nzSpan]="8">
+                            <p>Total Fare:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-divider nzPlain nzText="Pickup Location"></nz-divider>
+                    <nz-row [nzGutter]="24">
+                      <nz-col [nzSpan]="24  ">
+                        <p>Western Aqua, Table Space 11th floor, Hitec City Hyderabad</p>
+                      </nz-col>
+                    </nz-row>
+                </nz-col>
+            </nz-row>
+          </ng-template>
+            <ng-template #actionEllipsisReject>
+              <button nz-button nzType="primary" nzDanger (click)="showModal()">Cancel Ride</button>
+            </ng-template>
+          <ng-template #coverTemplate>
+            <img alt="example" src="../../../../assets/images/RE.jpg" />
+          </ng-template>
+    </nz-col>
+</nz-row>
+
+  
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Add Remarks" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-form-label>Remarks</nz-form-label>
+              <nz-textarea-count [nzMaxCharacterCount]="100">
+                <textarea rows="4" nz-input placeholder="Reason for cancelling the ride.."></textarea>
+              </nz-textarea-count>
+            </nz-form-control>
+          </nz-form-item>
+    </ng-container>
+  </nz-modal>

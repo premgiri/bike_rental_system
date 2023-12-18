@@ -12,22 +12,19 @@ const routes: Routes = [
     data: {
       customBreadcrumb: 'Bikes List',
     },
-    children: [ // Add children routes under 'bikes-list'
-      {
-        path: 'previous-rides',
-        component: PreviousRidesComponent, // Add PreviousRidesComponent as a child route
-        data: {
-          customBreadcrumb: 'Previous Rides',
-        },
-      },
-      // Add other children routes if needed under 'bikes-list'
-    ],
   },
   {
     path:'add-bike',
     component:AddBikeComponent,
     data: {
       customBreadcrumb: 'Add Bike',
+    },
+  },
+  {
+    path:'previous-rides',
+    component:PreviousRidesComponent,
+    data: {
+      customBreadcrumb: 'Previous Rides',
     },
   }
 ];

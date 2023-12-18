@@ -1,1 +1,76 @@
-<p>past-rides works!</p>
+<nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="12">
+        <nz-card style="width:400px;" [nzCover]="coverTemplate">
+            <nz-card-meta
+              [nzDescription]="cardContent"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #cardContent>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="24">
+                    <nz-row [nzGutter]="12">
+                        <nz-col [nzSpan]="8">
+                            <p>Bike Name:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="12">
+                        <nz-col [nzSpan]="8">
+                            <p>Registration Number:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>TS120F7725</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="12">
+                        <nz-col [nzSpan]="8">
+                            <p>Price Per Day:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>100$</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-divider nzPlain nzText="Rider Details"></nz-divider>
+                    <nz-row [nzGutter]="24">
+                        <nz-col [nzSpan]="8">
+                            <p>Start Date:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="24">
+                        <nz-col [nzSpan]="8">
+                            <p>End Date:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="24">
+                        <nz-col [nzSpan]="8">
+                            <p>Total Fare:</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <p>Benz</p>
+                        </nz-col>
+                    </nz-row>
+                    <nz-row [nzGutter]="24">
+                        <nz-col [nzSpan]="8">
+                            <p>Ride Status</p>
+                        </nz-col>
+                        <nz-col [nzSpan]="16">
+                            <nz-tag [nzColor]="'green'">Completed</nz-tag>
+                            <!-- <nz-tag [nzColor]="'red'">Cancelled</nz-tag> -->
+                        </nz-col>
+                    </nz-row>
+                </nz-col>
+            </nz-row>
+          </ng-template>
+          <ng-template #coverTemplate>
+            <img alt="example" src="../../../../assets/images/RE.jpg" />
+          </ng-template>
+    </nz-col>
+</nz-row>

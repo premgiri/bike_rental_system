@@ -69,6 +69,17 @@ const routes: Routes = [
         }
       },
       {
+        path: 'previous-rides',
+        // canActivate: [AllPermissionGuard],
+        loadChildren: () => import('./pages/bike-owner/manage-bikes/manage-bikes.module')
+          .then(user => user.ManageBikesModule),
+          
+        data: {
+          // role: ['Admin', 'Resource', 'Approver'],
+          breadcrumb:'Manage Bikes'
+        }
+      },
+      {
         path: 'bookings',
         // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/bike-owner/bookings/bookings.module')
