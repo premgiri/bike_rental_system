@@ -10,21 +10,21 @@ const routes: Routes = [
     path:'bikes-list',
     component:BikesListComponent,
     data: {
-      customBreadcrumb: 'Bikes List',
+      breadcrumb: 'Bikes List',
     },
   },
   {
     path:'add-bike',
     component:AddBikeComponent,
     data: {
-      customBreadcrumb: 'Add Bike',
+      breadcrumb: 'Add Bike',
     },
   },
   {
     path:'previous-rides',
     component:PreviousRidesComponent,
     data: {
-      customBreadcrumb: 'Previous Rides',
+      breadcrumb: 'Previous Rides',
     },
   }
 ];

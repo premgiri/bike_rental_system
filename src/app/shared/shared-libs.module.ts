@@ -41,6 +41,7 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
     NzLayoutModule,
     NzStatisticModule,
     NgApexchartsModule,
+    NzBackTopModule,
     NzMenuModule,
     NzBreadCrumbModule,
     NzPageHeaderModule,
