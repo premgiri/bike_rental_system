@@ -40,6 +40,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NgApexchartsModule,
     NzMenuModule,
     NzBreadCrumbModule,
+    NzPageHeaderModule,
     NzCollapseModule,
     FormsModule,
     NzDatePickerModule,

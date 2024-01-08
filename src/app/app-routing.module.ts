@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component:LoginComponent },
@@ -135,6 +136,10 @@ const routes: Routes = [
         }
       }
     ]
+    },
+    {
+      path:'**',
+      component:NotFoundComponent
     }
 ];
 
