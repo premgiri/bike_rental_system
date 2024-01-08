@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class UserDashboardComponent {
   isVisible = false;
+  isViewBikeDetails:boolean = false;
   
   showModal(): void {
     this.isVisible = true;

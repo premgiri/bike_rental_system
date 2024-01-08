@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class CurrentBookingsComponent {
   isVisible = false;
+  isViewBikeDetails:boolean = false;
   
   showModal(): void {
     this.isVisible = true;

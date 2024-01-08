@@ -1,21 +1,26 @@
 <nz-row [nzGutter]="24">
     <nz-col [nzSpan]="12">
         <nz-card style="width:400px;" [nzCover]="coverTemplate">
+            <div class="d-flex justify-content-between mb-3">
+                <b>Royal Enfield</b>
+                <a nz-button nzType="link" (click)="isViewBikeDetails = !isViewBikeDetails">Collapse<span nz-icon [nzType]="isViewBikeDetails ? 'down' : 'up'"></span></a>
+            </div>
             <nz-card-meta
               [nzDescription]="cardContent"
             ></nz-card-meta>
           </nz-card>
           <ng-template #cardContent>
+            <div *ngIf="isViewBikeDetails">
             <nz-row [nzGutter]="24">
                 <nz-col [nzSpan]="24">
-                    <nz-row [nzGutter]="12">
+                    <!-- <nz-row [nzGutter]="12">
                         <nz-col [nzSpan]="8">
                             <p>Bike Name:</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
                             <p>Benz</p>
                         </nz-col>
-                    </nz-row>
+                    </nz-row> -->
                     <nz-row [nzGutter]="12">
                         <nz-col [nzSpan]="8">
                             <p>Registration Number:</p>
@@ -68,6 +73,7 @@
                     </nz-row>
                 </nz-col>
             </nz-row>
+            </div>
           </ng-template>
           <ng-template #coverTemplate>
             <img alt="example" src="../../../../assets/images/RE.jpg" />

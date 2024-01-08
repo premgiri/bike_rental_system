@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./past-rides.component.scss']
 })
 export class PastRidesComponent {
-  
+  isViewBikeDetails:boolean = false;
 }

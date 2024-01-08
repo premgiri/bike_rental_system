@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./bikes-list.component.scss']
 })
 export class BikesListComponent {
-
+  isViewBikeDetails:boolean = false;
 }
