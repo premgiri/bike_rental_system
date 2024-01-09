@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
-
+import { ProfileDetailsService } from './services/profile-details.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-profile-details',
   templateUrl: './profile-details.component.html',
@@ -15,8 +17,14 @@ export class ProfileDetailsComponent {
   confirmPasswordVisible = false;
   isVisible = false;
   date = null;
-
-  
+  changePasswordForm:FormGroup = new FormGroup({})
+  constructor(private fb:FormBuilder, private profilesService: ProfileDetailsService, private message: NzMessageService){
+    this.changePasswordForm = this.fb.group({
+      currentPassword: new FormControl(''),
+      newPassword: new FormControl(''),
+      confirmPassword: new FormControl('')
+    })
+  }
   beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
     new Observable((observer: Observer<boolean>) => {
       const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -78,4 +86,15 @@ export class ProfileDetailsComponent {
     console.log('onChange: ', result);
   }
 
+  onChangePssword(){
+    const form = this.changePasswordForm.value;
+    const payload = {
+      current_password:form.currentPassword,
+      new_password:form.newPassword
+    }
+    this.profilesService.passwordChange(payload).subscribe((response:any)=>{
+      console.log(response);
+      this.message.success('Password changed successfully');
+    })
+  }
 }

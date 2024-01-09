@@ -101,7 +101,7 @@ export class BikeOwnerDashboardComponent implements OnInit{
     };
   }
   ngOnInit(): void {
-      
+      this.getDashboardDetails();
   }
 
   getDashboardDetails(){

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit{
         if(response.role === 'Bike Owner'){
           this.router.navigate(['/bike-owner-dashboard']);
         }
-        if(response.role === 'Users'){
+        if(response.role === 'User'){
           this.router.navigate(['/user-dashboard']);
         }
         // if(){}

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LayoutComponent implements OnInit{
   isCollapsed = false;
+  isCollapsedNav = false;
   menuItems:any;
   visible: boolean = false;
   constructor(private ngxPermission: NgxPermissionsService, private router:Router){}
@@ -97,6 +98,11 @@ export class LayoutComponent implements OnInit{
   onLogout(){
     localStorage.clear();
     this.router.navigate(['']);
+  }
+
+  toggleCollapsed(): void {
+    this.isCollapsed = !this.isCollapsed;
+    console.log(this.isCollapsed);
   }
 
 
