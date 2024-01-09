@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -30,97 +31,188 @@ export type ChartOptions = {
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
-export class AdminDashboardComponent {
-  public chartOptions: any;
-  constructor() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "No. of users",
-          data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35, 40, 20]
-        }
-      ],
-      annotations: {
-        points: [
-          {
-            x: "Bananas",
-            seriesIndex: 0,
-            label: {
-              borderColor: "#775DD0",
-              offsetY: 0,
-              style: {
-                color: "#fff",
-                background: "#775DD0"
-              },
-              // text: "Bananas are good"
+export class AdminDashboardComponent implements OnInit{
+  public usersChartOptions: any;
+  public bikeOwnersChartOptions:any;
+  public bikeOwnersCount:number = 0;
+  public usersCount:number = 0;
+  public usersCountArray:number[] = [];
+  public usersDatesArray:string[] = [];
+  public bikeOwnersCountArray:number[] = [];
+  public bikeOwnersDatesArray:string[] = [];
+  
+  constructor(private adminService: AdminService) {
+    this.getDashboardDetails();
+  }
+
+
+  getDashboardDetails(){
+    this.adminService.getDashboard().subscribe((response:any)=>{
+      this.bikeOwnersCount = response.bike_owners_count;
+      this.usersCount = response.users_count;
+      response.users_count_list.forEach((response:any)=>{
+        const dates = Object.keys(response)[0];
+        const counts = response[dates]
+        this.usersCountArray.push(counts);
+        this.usersDatesArray.push(dates);
+        this.usersChartOptions = {
+          series: [
+            {
+              name: "No. of users",
+              data: this.usersCountArray
+            }
+          ],
+          annotations: {
+            points: [
+              {
+                x: "Bananas",
+                seriesIndex: 0,
+                label: {
+                  borderColor: "#775DD0",
+                  offsetY: 0,
+                  style: {
+                    color: "#fff",
+                    background: "#775DD0"
+                  },
+                  // text: "Bananas are good"
+                }
+              }
+            ]
+          },
+          chart: {
+            height: 350,
+            type: "bar"
+          },
+          plotOptions: {
+            bar: {
+              columnWidth: "50%",
+              endingShape: "rounded"
+            }
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            width: 2
+          },
+    
+          grid: {
+            row: {
+              colors: ["#fff", "#f2f2f2"]
+            }
+          },
+          xaxis: {
+            labels: {
+              rotate: -45
+            },
+            categories:this.usersDatesArray,
+            tickPlacement: "on"
+          },
+          yaxis: {
+            title: {
+              text: "No. of users"
+            },
+          },
+          fill: {
+            type: "gradient",
+            gradient: {
+              shade: "light",
+              type: "horizontal",
+              shadeIntensity: 0.25,
+              gradientToColors: undefined,
+              inverseColors: true,
+              opacityFrom: 0.85,
+              opacityTo: 0.85,
+              stops: [50, 0, 100]
             }
           }
-        ]
-      },
-      chart: {
-        height: 350,
-        type: "bar"
-      },
-      plotOptions: {
-        bar: {
-          columnWidth: "50%",
-          endingShape: "rounded"
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: 2
-      },
-
-      grid: {
-        row: {
-          colors: ["#fff", "#f2f2f2"]
-        }
-      },
-      xaxis: {
-        labels: {
-          rotate: -45
-        },
-        categories: [
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
+        };           
+        // this.usersChartOptions.xaxis.categories = this.usersDatesArray;
+        // this.usersChartOptions.series[0].data = this.usersCountArray;
+      })
+      console.log(response);
+      response.bike_owners_count_list.forEach((response:any)=>{
+        const dates = Object.keys(response)[0];
+        const counts = response[dates]
+        this.bikeOwnersCountArray.push(counts);
+        this.bikeOwnersDatesArray.push(dates);
+      })
+      this.bikeOwnersChartOptions = {
+        series: [
+          {
+            name: "No. of bike owners",
+            data: this.bikeOwnersCountArray
+          }
         ],
-        tickPlacement: "on"
-      },
-      yaxis: {
-        title: {
-          text: "No. of users"
+        annotations: {
+          points: [
+            {
+              x: "Bananas",
+              seriesIndex: 0,
+              label: {
+                borderColor: "#775DD0",
+                offsetY: 0,
+                style: {
+                  color: "#fff",
+                  background: "#775DD0"
+                },
+                // text: "Bananas are good"
+              }
+            }
+          ]
+        },
+        chart: {
+          height: 350,
+          type: "bar"
+        },
+        plotOptions: {
+          bar: {
+            columnWidth: "50%",
+            endingShape: "rounded"
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: 2
+        },
+  
+        grid: {
+          row: {
+            colors: ["#fff", "#f2f2f2"]
+          }
+        },
+        xaxis: {
+          labels: {
+            rotate: -45
+          },
+          categories: this.bikeOwnersDatesArray,
+          tickPlacement: "on"
+        },
+        yaxis: {
+          title: {
+            text: "No. of bike owners"
+          }
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shade: "light",
+            type: "horizontal",
+            shadeIntensity: 0.25,
+            gradientToColors: undefined,
+            inverseColors: true,
+            opacityFrom: 0.85,
+            opacityTo: 0.85,
+            stops: [50, 0, 100]
+          }
         }
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "light",
-          type: "horizontal",
-          shadeIntensity: 0.25,
-          gradientToColors: undefined,
-          inverseColors: true,
-          opacityFrom: 0.85,
-          opacityTo: 0.85,
-          stops: [50, 0, 100]
-        }
-      }
-    };
+      };
+    })
+  }
+
+  ngOnInit(): void {
+
   }
 }

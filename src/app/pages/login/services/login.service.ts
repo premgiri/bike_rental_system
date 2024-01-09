@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment.development';
 export class LoginService {
   private readonly apiRoot: string = environment.apiBase;
 
-  private firebaseLoginAPI = ApiData.firebaseLoginAPI;
+  private login = ApiData.login;
   constructor(private http: HttpClient) { }
-  loginwithFirebase(loginDetails:any){
-    return this.http.post(this.firebaseLoginAPI,loginDetails)
+  userLogin(loginDetails:any){
+    return this.http.post(`${this.apiRoot}/${this.login}`,loginDetails)
   }
 }

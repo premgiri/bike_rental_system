@@ -13,15 +13,17 @@
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
         <ng-container *ngFor="let item of menuItems">
-          <li
-            *ngIf="!item.subMenu || item.subMenu.length === 0; else hasSubMenu"
-            nz-menu-item
-            nzMatchRouter
-            [routerLink]="item.path"
-          >
-            <span class="pt-2" nz-icon [nzType]="item.icon" nzTheme="outline" class="menuIcon"></span>
-            <span class="name">{{ item.name }}</span>
-          </li>
+          <ng-container *ngxPermissionsOnly="item.role">
+            <li
+              *ngIf="!item.subMenu || item.subMenu.length === 0; else hasSubMenu"
+              nz-menu-item
+              nzMatchRouter
+              [routerLink]="item.path"
+            >
+              <span class="pt-2" nz-icon [nzType]="item.icon" nzTheme="outline" class="menuIcon"></span>
+              <span class="name">{{ item.name }}</span>
+            </li>
+          </ng-container>
           <ng-template #hasSubMenu>
             <li nz-submenu [nzTitle]="item.name" [nzIcon]="item.icon">
               <ul nz-menu nzTheme="dark">
@@ -83,7 +85,7 @@
           <ng-template #contentTemplate>
             <div class="profile-items">
               <li [routerLink]="'/profile-details'"><span nz-icon nzType="user" nzTheme="outline"></span>User Profile</li>
-              <li><span nz-icon nzType="logout" nzTheme="outline"></span>Logout</li>
+              <li (click)="onLogout()"><span nz-icon nzType="logout" nzTheme="outline"></span>Logout</li>
             </div>
           </ng-template>
         </span>

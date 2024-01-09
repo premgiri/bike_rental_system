@@ -7,7 +7,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { LayoutComponent } from './pages/layout/layout.component';
@@ -25,6 +25,9 @@ import { PastRidesComponent } from './pages/user/past-rides/past-rides.component
 import { CurrentBookingsComponent } from './pages/user/current-bookings/current-bookings.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { ProfileDetailsComponent } from './pages/profile-details/profile-details.component';
+import { HttpInterceptorService } from './interceptors/http.interceptor';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { DatePipe } from '@angular/common';
 
 registerLocaleData(en);
 
@@ -47,6 +50,7 @@ registerLocaleData(en);
   ],
   imports: [
     SharedModule,
+    NgxPermissionsModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -56,6 +60,12 @@ registerLocaleData(en);
 
   ],
   providers: [
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
     { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]

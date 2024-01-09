@@ -1,5 +1,5 @@
 export const environment = {
-    apiBase: 'http://65.0.201.127:8001',
+    apiBase: 'http://127.0.0.1:5000',
     // apiBase: 'https://timesheet.prutech.com',
   
     production: false

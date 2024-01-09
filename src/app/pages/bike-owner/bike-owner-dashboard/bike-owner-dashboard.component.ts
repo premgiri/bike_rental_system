@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BikeOwnerService } from '../services/bike-owner.service';
 
 @Component({
   selector: 'app-bike-owner-dashboard',
   templateUrl: './bike-owner-dashboard.component.html',
   styleUrls: ['./bike-owner-dashboard.component.scss']
 })
-export class BikeOwnerDashboardComponent {
+export class BikeOwnerDashboardComponent implements OnInit{
   public chartOptions: any;
-  constructor() {
+  constructor(private bikeOwnerService:BikeOwnerService) {
+    this.getDashboardDetails();
     this.chartOptions = {
       series: [
         {
@@ -97,5 +99,14 @@ export class BikeOwnerDashboardComponent {
         }
       }
     };
+  }
+  ngOnInit(): void {
+      
+  }
+
+  getDashboardDetails(){
+    this.bikeOwnerService.getDashboard().subscribe((response:any)=>{
+      console.log(response);
+    })
   }
 }

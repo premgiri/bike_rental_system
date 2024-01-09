@@ -12,7 +12,7 @@
         <nz-page-header-title><h5>Registration</h5></nz-page-header-title>
         </nz-page-header>
       <nz-divider></nz-divider>
-      <form>
+      <form [formGroup]="registrationForm">
         <b><nz-divider nzText="Personal Info" nzOrientation="center"></nz-divider></b>
         <div class="row">
             <div class="col-lg-3">
@@ -22,10 +22,8 @@
                    <!-- <nz-form-control>
                       <input nz-input name="dob" id="dob">
                     </nz-form-control> -->
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" [(ngModel)]="selectedValue" name="role" id="role">
-                      <nz-option nzLabel="Admin" nzValue="Admin"></nz-option>
-                      <nz-option nzLabel="Bike Owner" nzValue="Bike Owner"></nz-option>
-                      <nz-option nzLabel="User" nzValue="User"></nz-option>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" name="role" id="role" formControlName="role">
+                      <nz-option [nzLabel]="role.role_name" [nzValue]="role.id" *ngFor="let role of allRoles"></nz-option>
                     </nz-select>
                     </nz-form-control>
                 </nz-form-item >
@@ -35,7 +33,7 @@
                   <nz-form-control>
                     <nz-form-label nzFor="firstName">First Name</nz-form-label>
                     <nz-form-control>
-                      <input placeholder="Enter name" nz-input name="firstName" id="firstName">
+                      <input placeholder="Enter name" nz-input name="firstName" id="firstName" formControlName="firstName">
                     </nz-form-control>
                     </nz-form-control>
                 </nz-form-item >
@@ -44,7 +42,7 @@
                 <nz-form-item>
                   <nz-form-control>
                     <nz-form-label nzFor="middleName">Middle Name</nz-form-label>
-                    <input placeholder="Middle name" nz-input name="middleName" id="middleName">
+                    <input placeholder="Middle name" nz-input name="middleName" id="middleName" formControlName="middleName">
                   </nz-form-control>
                 </nz-form-item >
             </div>
@@ -52,7 +50,7 @@
                 <nz-form-item>
                   <nz-form-control>
                   <nz-form-label nzFor="lastName">Last Name</nz-form-label>
-                    <input placeholder="Last name" nz-input name="lastName" id="lastName">
+                    <input placeholder="Last name" nz-input name="lastName" id="lastName" formControlName="lastName">
                   </nz-form-control>
                 </nz-form-item >
             </div>
@@ -62,7 +60,7 @@
               <nz-form-item>
                 <nz-form-control>
                   <nz-form-label nzFor="email">Email</nz-form-label>
-                    <input placeholder="Enter email" nz-input name="email" id="email">
+                    <input placeholder="Enter email" nz-input name="email" id="email" formControlName="email">
                 </nz-form-control>
               </nz-form-item >
           </div>
@@ -70,7 +68,7 @@
               <nz-form-item>
                 <nz-form-control>
                 <nz-form-label nzFor="phoneNumber">Phone Number</nz-form-label>
-                  <input placeholder="Enter phone number" nz-input name="phoneNumber" id="phoneNumber">
+                  <input placeholder="Enter phone number" nz-input name="phoneNumber" id="phoneNumber" formControlName="phoneNumber">
                 </nz-form-control>
               </nz-form-item >
           </div>
@@ -78,7 +76,7 @@
               <nz-form-item>
                 <nz-form-control>
                 <nz-form-label nzFor="alternatePhoneNumber">Alternate Phone Number</nz-form-label>
-                  <input placeholder="Enter alternate phone number" nz-input name="alternatePhoneNumber" id="alternatePhoneNumber">
+                  <input placeholder="Enter alternate phone number" nz-input name="alternatePhoneNumber" id="alternatePhoneNumber" formControlName="alternatePhoneNumber">
                 </nz-form-control>
               </nz-form-item >
           </div>
@@ -86,7 +84,7 @@
               <nz-form-item>
                 <nz-form-control>
                 <nz-form-label nzFor="dob">Date Of Birth</nz-form-label>
-                <nz-date-picker nz-input nzPlaceHolder="Select date"></nz-date-picker>
+                <nz-date-picker nz-input nzPlaceHolder="Select date" formControlName="dob"></nz-date-picker>
               </nz-form-control>
               </nz-form-item >
           </div>
@@ -96,7 +94,7 @@
           <nz-form-item>
             <nz-form-control>
             <nz-form-label nzFor="gender">Gender</nz-form-label>
-            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a gender" [(ngModel)]="selectedValue" name="gender" id="gender">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a gender" formControlName="gender" name="gender" id="gender">
               <nz-option nzLabel="Male" nzValue="Male"></nz-option>
               <nz-option nzLabel="Female" nzValue="Female"></nz-option>
               <nz-option nzLabel="Unspecified" nzValue="Unspecified"></nz-option>
@@ -111,7 +109,7 @@
             <nz-form-item>
               <nz-form-control>
               <nz-form-label nzFor="address1">Address Line1</nz-form-label>
-                <input placeholder="Enter address line1" nz-input name="address1" id="address1">
+                <input placeholder="Enter address line1" nz-input name="address1" id="address1" formControlName="address1">
               </nz-form-control>
             </nz-form-item >
         </div>
@@ -119,7 +117,7 @@
             <nz-form-item>
               <nz-form-control>
               <nz-form-label nzFor="address2">Address Line2</nz-form-label>
-                <input placeholder="Enter address line2" nz-input name="address2" id="address2">
+                <input placeholder="Enter address line2" nz-input name="address2" id="address2" formControlName="address2">
               </nz-form-control>
             </nz-form-item >
         </div>
@@ -127,7 +125,7 @@
             <nz-form-item>
               <nz-form-control>
               <nz-form-label nzFor="country">Country</nz-form-label>
-                <input placeholder="Enter country" nz-input name="country" id="country">
+                <input placeholder="Enter country" nz-input name="country" id="country" formControlName="country">
               </nz-form-control>
             </nz-form-item >
         </div>
@@ -135,7 +133,7 @@
             <nz-form-item>
               <nz-form-control>
               <nz-form-label nzFor="state">State</nz-form-label>
-                <input placeholder="Enter state" nz-input name="state" id="state">
+                <input placeholder="Enter state" nz-input name="state" id="state" formControlName="state">
               </nz-form-control>
             </nz-form-item >
         </div>
@@ -145,7 +143,7 @@
         <nz-form-item>
           <nz-form-control>
           <nz-form-label nzFor="city">City</nz-form-label>
-            <input placeholder="Enter city" nz-input name="city" id="city">
+            <input placeholder="Enter city" nz-input name="city" id="city" formControlName="city">
           </nz-form-control>
         </nz-form-item >
     </div>
@@ -153,7 +151,7 @@
         <nz-form-item>
           <nz-form-control>
           <nz-form-label nzFor="zipCode">Zip Code</nz-form-label>
-            <input placeholder="Enter zip code" nz-input name="zipCode" id="zipCode">
+            <input placeholder="Enter zip code" nz-input name="zipCode" id="zipCode" formControlName="zipCode">
           </nz-form-control>
         </nz-form-item >
     </div>
@@ -164,17 +162,27 @@
         <nz-form-item>
           <nz-form-control>
           <nz-form-label nzFor="password">Password</nz-form-label>
-            <input placeholder="Enter password" nz-input name="password" id="password">
+          <nz-input-group [nzAddOnAfter]="addOnAfterPasswordemplate">
+            <input placeholder="Enter password" nz-input name="password" [type]="isShowPassword ? 'text' : 'password'" id="password" formControlName="password">
+          </nz-input-group>
           </nz-form-control>
         </nz-form-item >
+        <ng-template #addOnAfterPasswordemplate>
+          <span nz-icon [nzType]="isShowPassword ? 'eye' : 'eye-invisible'" nzTheme="outline" (click)="toggleEyeIcon()"></span>
+        </ng-template>
     </div>
     <div class="col-lg-3">
         <nz-form-item>
           <nz-form-control>
           <nz-form-label nzFor="confirmPassword">Confirm Password</nz-form-label>
-            <input placeholder="Enter confirm password" nz-input name="confirmPassword" id="confirmPassword">
+          <nz-input-group [nzAddOnAfter]="addOnAfterConfirmPasswordTemplate">
+            <input placeholder="Enter confirm password" nz-input name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" [type]="isShowConfirmPassword ? 'text' : 'password'">
+            </nz-input-group>
           </nz-form-control>
         </nz-form-item >
+        <ng-template #addOnAfterConfirmPasswordTemplate>
+          <span nz-icon [nzType]="isShowConfirmPassword ? 'eye' : 'eye-invisible'" nzTheme="outline" (click)="toggleConfirmEyeIcon()"></span>
+        </ng-template>
     </div>
     </div>
         <!-- <div class="row">

@@ -1,9 +1,9 @@
 <nz-row [nzGutter]="16">
     <nz-col [nzSpan]="12">
-      <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'Users'"></nz-statistic>
+      <nz-statistic [nzValue]="bikeOwnersCount" [nzTitle]="'Users'"></nz-statistic>
     </nz-col>
     <nz-col [nzSpan]="12">
-      <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Bike owners'"></nz-statistic>
+      <nz-statistic [nzValue]="usersCount" [nzTitle]="'Bike owners'"></nz-statistic>
     </nz-col>
   </nz-row>
 
@@ -12,32 +12,32 @@
     <nz-col [nzSpan]="12">
       <div id="chart">
         <apx-chart
-          [series]="chartOptions.series"
-          [chart]="chartOptions.chart"
-          [dataLabels]="chartOptions.dataLabels"
-          [plotOptions]="chartOptions.plotOptions"
-          [yaxis]="chartOptions.yaxis"
-          [xaxis]="chartOptions.xaxis"
-          [stroke]="chartOptions.stroke"
-          [grid]="chartOptions.grid"
-          [fill]="chartOptions.fill"
-          [annotations]="chartOptions.annotations"
+          [series]="usersChartOptions?.series"
+          [chart]="usersChartOptions?.chart"
+          [dataLabels]="usersChartOptions?.dataLabels"
+          [plotOptions]="usersChartOptions?.plotOptions"
+          [yaxis]="usersChartOptions?.yaxis"
+          [xaxis]="usersChartOptions?.xaxis"
+          [stroke]="usersChartOptions?.stroke"
+          [grid]="usersChartOptions?.grid"
+          [fill]="usersChartOptions?.fill"
+          [annotations]="usersChartOptions?.annotations"
         ></apx-chart>
       </div>
     </nz-col>
     <nz-col [nzSpan]="12">
       <div id="chart">
         <apx-chart
-          [series]="chartOptions.series"
-          [chart]="chartOptions.chart"
-          [dataLabels]="chartOptions.dataLabels"
-          [plotOptions]="chartOptions.plotOptions"
-          [yaxis]="chartOptions.yaxis"
-          [xaxis]="chartOptions.xaxis"
-          [stroke]="chartOptions.stroke"
-          [grid]="chartOptions.grid"
-          [fill]="chartOptions.fill"
-          [annotations]="chartOptions.annotations"
+          [series]="bikeOwnersChartOptions?.series"
+          [chart]="bikeOwnersChartOptions?.chart"
+          [dataLabels]="bikeOwnersChartOptions?.dataLabels"
+          [plotOptions]="bikeOwnersChartOptions?.plotOptions"
+          [yaxis]="bikeOwnersChartOptions?.yaxis"
+          [xaxis]="bikeOwnersChartOptions?.xaxis"
+          [stroke]="bikeOwnersChartOptions?.stroke"
+          [grid]="bikeOwnersChartOptions?.grid"
+          [fill]="bikeOwnersChartOptions?.fill"
+          [annotations]="bikeOwnersChartOptions?.annotations"
         ></apx-chart>
       </div>
     </nz-col>

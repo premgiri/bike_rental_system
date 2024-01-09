@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
 interface DataItem {
   firstName: string;
   lastName: string;
@@ -14,7 +15,14 @@ interface DataItem {
   templateUrl: './manage-bike-owners.component.html',
   styleUrls: ['./manage-bike-owners.component.scss']
 })
-export class ManageBikeOwnersComponent {
+export class ManageBikeOwnersComponent implements OnInit{
+  public bikeOwnersList:any[] = [];
+  public usersList:any[] = [];
+  constructor(private adminService:AdminService){}
+  ngOnInit(): void {
+      this.getAllBikeOwners();
+      this.getAllUsers();
+  }
   isVisible = false;
   selectedValue = null;
   listOfColumn = [
@@ -102,5 +110,17 @@ export class ManageBikeOwnersComponent {
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
+  }
+
+  getAllBikeOwners(){
+    this.adminService.getAllBikeOwners().subscribe((response:any)=>{
+      console.log(response);
+    })
+  }
+
+  getAllUsers(){
+    this.adminService.getAllUserDetails().subscribe((response:any)=>{
+      console.log(response);
+    })
   }
 }

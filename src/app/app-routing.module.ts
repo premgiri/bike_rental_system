@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { UserRouteAccess } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: '', component:LoginComponent },
@@ -21,9 +22,9 @@ const routes: Routes = [
           .then(user => user.AdminDashboardModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
           breadcrumb:'Dashboard'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'manage-bike-owners',
@@ -32,108 +33,109 @@ const routes: Routes = [
           .then(user => user.ManageBikeOwnersModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
           breadcrumb:'Manage Bike Owners'
-        }
+        },
+        canActivate:[UserRouteAccess]
+
       },
       {
         path: 'manage-users',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/admin/manage-users/manage-users.module')
           .then(user => user.ManageUsersModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['Admin'],
           breadcrumb:'Manage Users'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'bike-owner-dashboard',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/bike-owner/bike-owner-dashboard/bike-owner-dashboard.module')
           .then(user => user.BikeOwnerDashboardModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['Bike Owner'],
           breadcrumb:'Dashboard'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: '',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/bike-owner/manage-bikes/manage-bikes.module')
           .then(user => user.ManageBikesModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['Bike Owner'],
           breadcrumb:'Manage Bikes'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'previous-rides',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/bike-owner/manage-bikes/manage-bikes.module')
           .then(user => user.ManageBikesModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['Bike Owner'],
           breadcrumb:'Manage Bikes'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'bookings',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/bike-owner/bookings/bookings.module')
           .then(user => user.BookingsModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['Bike Owner'],
           breadcrumb:'Bookings'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'user-dashboard',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/user/user-dashboard/user-dashboard.module')
           .then(user => user.UserDashboardModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['User'],
           breadcrumb:'Dashboard'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'past-rides',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/user/past-rides/past-rides.module')
           .then(user => user.BikeOwnerDashboardModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['User'],
           breadcrumb:'Past Rides'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'current-bookings',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/user/current-bookings/current-bookings.module')
           .then(user => user.CurrentBookingsModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['User'],
           breadcrumb:'Current Bookings'
-        }
+        },
+        canActivate:[UserRouteAccess]
       },
       {
         path: 'profile-details',
-        // canActivate: [AllPermissionGuard],
         loadChildren: () => import('./pages/profile-details/profile-details.module')
           .then(user => user.BikeOwnerDashboardModule),
           
         data: {
-          // role: ['Admin', 'Resource', 'Approver'],
+          role: ['Admin', 'Bike Owner', 'User'],
           breadcrumb:'Profile Details'
-        }
+        },
+        canActivate:[UserRouteAccess]
       }
     ]
     },
