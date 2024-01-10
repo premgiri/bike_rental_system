@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit{
         const roles:any = [];
         roles.push(response.role);
         localStorage.setItem('access-token',response.access_token);
+        localStorage.setItem('id',response.id);
         response.role;
         localStorage.setItem('roles',JSON.stringify(roles));
         const localRoles = JSON.parse(localStorage.getItem('roles') || '[]');

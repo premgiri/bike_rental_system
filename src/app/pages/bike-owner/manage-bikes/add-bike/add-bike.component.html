@@ -8,9 +8,9 @@
     <nz-upload
     *ngIf="current==0"
       nzType="drag"
-      [nzMultiple]="true"
-      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      (nzChange)="handleChange($event)"
+      [nzMultiple]="false"
+      [(nzFileList)]="imageFileList"
+      [nzBeforeUpload]="beforeUploadImage"
     >
       <p class="ant-upload-drag-icon">
         <span nz-icon nzType="inbox"></span>
@@ -20,23 +20,24 @@
         Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
       </p>
     </nz-upload>
-    <div *ngIf="current==1">
+    <form [formGroup]="addBikeForm">
+      <div *ngIf="current==1">
         <div class="row">
             <div class="col-lg-6">
                 <nz-form-item>
                     <nz-form-label nzFor="vehicleName">Vehicle Name</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input placeholder="Enter vehicle name" nz-input name="vehicleName" id="vehicleName">
+                      <input placeholder="Enter vehicle name" nz-input name="vehicleName" id="vehicleName" formControlName="vehicleName">
                     </nz-form-control>
                 </nz-form-item >
             </div>
             <div class="col-lg-6">
-                <nz-form-item>
-                    <nz-form-label nzFor="vehicleHire">Vehicle Hire Price Per Day</nz-form-label>
-                    <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input placeholder="Enter vehicle hire price" nz-input name="vehicleHire" id="vehicleHire">
-                    </nz-form-control>
-                </nz-form-item >
+              <nz-form-item>
+                <nz-form-label nzFor="vehicleSeatCapacity">Model Name</nz-form-label>
+                <nz-form-control nzHasFeedback [nzSpan]="24">
+                  <input placeholder="Enter model Name" nz-input name="modelName" id="vehicleSeatCapacity" formControlName="modelName">
+                </nz-form-control>
+            </nz-form-item >
             </div>
         </div>
         <div class="row">
@@ -44,17 +45,17 @@
                 <nz-form-item>
                     <nz-form-label nzFor="vehicleNumber">Vehicle Number</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input placeholder="Enter vehicle number" nz-input name="vehicleNumber" id="vehicleNumber">
+                      <input placeholder="Enter vehicle number" nz-input name="vehicleNumber" id="vehicleNumber" formControlName="vehicleNummber">
                     </nz-form-control>
                 </nz-form-item >
             </div>
             <div class="col-lg-6">
-                <nz-form-item>
-                    <nz-form-label nzFor="vehicleSeatCapacity">Vehicle Seating Capacity</nz-form-label>
-                    <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input placeholder="Enter vehicle seating capacity" nz-input name="vehicleSeatCapacity" id="vehicleSeatCapacity">
-                    </nz-form-control>
-                </nz-form-item >
+              <nz-form-item>
+                <nz-form-label nzFor="vehicleHire">Vehicle Hire Price Per Day</nz-form-label>
+                <nz-form-control nzHasFeedback [nzSpan]="24">
+                  <input placeholder="Enter vehicle hire price" nz-input name="vehicleHire" id="vehicleHire" formControlName="hirePricePerDay">
+                </nz-form-control>
+            </nz-form-item >
             </div>
         </div>
     </div>
@@ -64,7 +65,7 @@
                 <nz-form-item>
                     <nz-form-label nzFor="address1">Address Line1</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input placeholder="Enter address line1" nz-input name="address1" id="address1">
+                      <input placeholder="Enter address line1" nz-input name="address1" id="address1" formControlName="address1">
                     </nz-form-control>
                 </nz-form-item >
             </div>
@@ -72,7 +73,7 @@
                 <nz-form-item>
                     <nz-form-label nzFor="address2">Address Line2</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input placeholder="Enter address line2" nz-input name="address2" id="address2">
+                      <input placeholder="Enter address line2" nz-input name="address2" id="address2" formControlName="address2">
                     </nz-form-control>
                 </nz-form-item >
             </div>
@@ -82,7 +83,7 @@
                 <nz-form-item>
                     <nz-form-label nzFor="country">Country</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input placeholder="Enter country" nz-input name="country" id="country">
+                      <input placeholder="Enter country" nz-input name="country" id="country" formControlName="country">
                     </nz-form-control>
                 </nz-form-item >
             </div>
@@ -90,7 +91,7 @@
                 <nz-form-item>
                     <nz-form-label nzFor="state">State</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input  placeholder="Enter state" nz-input name="state" id="state">
+                      <input  placeholder="Enter state" nz-input name="state" id="state" formControlName="state">
                     </nz-form-control>
                 </nz-form-item >
             </div>
@@ -100,7 +101,7 @@
                 <nz-form-item>
                     <nz-form-label nzFor="city">City</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input  placeholder="Enter city" nz-input name="city" id="city">
+                      <input  placeholder="Enter city" nz-input name="city" id="city" formControlName="city">
                     </nz-form-control>
                 </nz-form-item >
             </div>
@@ -108,12 +109,13 @@
                 <nz-form-item>
                     <nz-form-label nzFor="zipCode">Zip Code</nz-form-label>
                     <nz-form-control nzHasFeedback [nzSpan]="24">
-                      <input  placeholder="Enter zip code" nz-input name="zipCode" id="zipCode">
+                      <input  placeholder="Enter zip code" nz-input name="zipCode" id="zipCode" formControlName="zipCode">
                     </nz-form-control>
                 </nz-form-item >
             </div>
         </div>
     </div>
+    </form>
   </div>
   <div class="steps-action d-flex justify-content-end">
     <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
@@ -122,7 +124,7 @@
     <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
       <span>Next</span>
     </button>
-    <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
+    <button nz-button nzType="primary" (click)="onAddBike()" *ngIf="current === 2">
       <span>Add</span>
     </button>
   </div>

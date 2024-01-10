@@ -1,5 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BikeOwnerService } from '../services/bike-owner.service';
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ChartComponent,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexYAxis,
+  ApexLegend,
+  ApexStroke,
+  ApexXAxis,
+  ApexFill,
+  ApexTooltip
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  fill: ApexFill;
+  tooltip: ApexTooltip;
+  stroke: ApexStroke;
+  legend: ApexLegend;
+};
 
 @Component({
   selector: 'app-bike-owner-dashboard',
@@ -7,106 +33,87 @@ import { BikeOwnerService } from '../services/bike-owner.service';
   styleUrls: ['./bike-owner-dashboard.component.scss']
 })
 export class BikeOwnerDashboardComponent implements OnInit{
+  @ViewChild("chart") chart: ChartComponent | any;
   public chartOptions: any;
+  private countDates: string[] = [];
+  private completedRidesCount:number[] = [];
+  private requestedRidesCount:number[] = [];
+  public totalBikesAdded:number = 0;
+  public ridesAmount:number = 0;
+  public pendingRides:number = 0;
+  public completedRides:number = 0;
   constructor(private bikeOwnerService:BikeOwnerService) {
     this.getDashboardDetails();
-    this.chartOptions = {
-      series: [
-        {
-          name: "No. of bikes",
-          data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35, 40, 20]
-        }
-      ],
-      annotations: {
-        points: [
-          {
-            x: "Bananas",
-            seriesIndex: 0,
-            label: {
-              borderColor: "#775DD0",
-              offsetY: 0,
-              style: {
-                color: "#fff",
-                background: "#775DD0"
-              },
-              // text: "Bananas are good"
-            }
-          }
-        ]
-      },
-      chart: {
-        height: 350,
-        type: "bar"
-      },
-      plotOptions: {
-        bar: {
-          columnWidth: "50%",
-          endingShape: "rounded"
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: 2
-      },
-
-      grid: {
-        row: {
-          colors: ["#fff", "#f2f2f2"]
-        }
-      },
-      xaxis: {
-        labels: {
-          rotate: -45
-        },
-        categories: [
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-          "20-10-2023",
-        ],
-        tickPlacement: "on"
-      },
-      yaxis: {
-        title: {
-          text: "No. of bikes"
-        }
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "light",
-          type: "horizontal",
-          shadeIntensity: 0.25,
-          gradientToColors: undefined,
-          inverseColors: true,
-          opacityFrom: 0.85,
-          opacityTo: 0.85,
-          stops: [50, 0, 100]
-        }
-      }
-    };
   }
   ngOnInit(): void {
-      this.getDashboardDetails();
   }
 
   getDashboardDetails(){
     this.bikeOwnerService.getDashboard().subscribe((response:any)=>{
       console.log(response);
+      this.totalBikesAdded = response.bikes_count;
+      this.completedRides = response.total_completed_ride_count;
+      this.pendingRides = response.current_bookings_count;
+      this.ridesAmount = response.total_earned_income;
+
+      this.countDates = response.ride_counts_list.map((date:any)=>{
+        return date.date;
+      });
+      this.completedRidesCount = response.ride_counts_list.map((count:any)=>{
+        return count.completed_ride_count;
+      });
+      this.requestedRidesCount = response.ride_counts_list.map((count:any)=>{
+        return count.requested_ride_count;
+      })
+      console.log(this.countDates);
+      this.chartOptions = {
+        series: [
+          {
+            name: "Completed rides",
+            data: this.completedRidesCount
+          },
+          {
+            name: "Requested rides",
+            data: this.requestedRidesCount
+          }
+        ],
+        chart: {
+          type: "bar",
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: "55%",
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"]
+        },
+        xaxis: {
+          categories: this.countDates
+        },
+        yaxis: {
+          title: {
+            text: "Number of bikes"
+          }
+        },
+        fill: {
+          opacity: 1
+        },
+        // tooltip: {
+        //   y: {
+        //     formatter: function(val:any) {
+        //       return "$ " + val + " thousands";
+        //     }
+        //   }
+        // }
+      };
     })
   }
 }

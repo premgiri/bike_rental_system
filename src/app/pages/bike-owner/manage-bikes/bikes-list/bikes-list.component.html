@@ -1,8 +1,8 @@
 <nz-row [nzGutter]="24">
-    <nz-col [nzSpan]="8">
+    <nz-col [nzSpan]="8" *ngFor="let bike of ownersBikesList">
         <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis]">
             <div class="d-flex justify-content-between mb-3">
-                <b>Royal Enfield</b>
+                <b>{{bike.bike_details.name}}</b>
                 <a nz-button nzType="link" (click)="isViewBikeDetails = !isViewBikeDetails">Collapse<span nz-icon [nzType]="isViewBikeDetails ? 'down' : 'up'"></span></a>
             </div>
             <nz-card-meta
@@ -24,7 +24,7 @@
                     <p>Registration Number:</p>
                 </nz-col>
                 <nz-col [nzSpan]="16">
-                    <p>Benzddddddddddd</p>
+                    <p>{{bike.bike_details.registration_number}}</p>
                 </nz-col>
             </nz-row>
             <nz-row [nzGutter]="12">
@@ -32,7 +32,7 @@
                     <p>Price:</p>
                 </nz-col>
                 <nz-col [nzSpan]="16">
-                    <p>Benzddddddddddd</p>
+                    <p>{{bike.bike_details.fare_per_day}}</p>
                 </nz-col>
             </nz-row>
             <nz-row [nzGutter]="12">
@@ -40,8 +40,8 @@
                     <p>Status:</p>
                 </nz-col>
                 <nz-col [nzSpan]="16">
-                    <nz-tag [nzColor]="'#87d068'">Active</nz-tag>
-                    <!-- <nz-tag [nzColor]="data.status == 'Active' ? '#87d068' :'#f50'">{{ data.status }}</nz-tag> -->
+                    <!-- <nz-tag [nzColor]="'#87d068'">Active</nz-tag> -->
+                    <nz-tag [nzColor]="bike.bike_details.status === 1 ? '#87d068' :'#f50'">{{bike.bike_details.status === 1 ? 'Active' : 'Inactive'}}</nz-tag>
                 </nz-col>
             </nz-row>
         </div>
@@ -50,7 +50,7 @@
             <button nz-button nzType="primary" [routerLink]="'/previous-rides'">Previous Rides</button>
           </ng-template>
           <ng-template #coverTemplate>
-            <img alt="example" src="../../../../../assets/images/RE.jpg" />
+            <img alt="example" [src]="'data:image/png;base64,' + bike.image" />
           </ng-template>
     </nz-col>
 </nz-row>
