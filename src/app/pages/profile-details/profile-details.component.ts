@@ -4,6 +4,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { ProfileDetailsService } from './services/profile-details.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile-details',
   templateUrl: './profile-details.component.html',
@@ -18,7 +19,7 @@ export class ProfileDetailsComponent {
   isVisible = false;
   date = null;
   changePasswordForm:FormGroup = new FormGroup({})
-  constructor(private fb:FormBuilder, private profilesService: ProfileDetailsService, private message: NzMessageService){
+  constructor(private fb:FormBuilder, private profilesService: ProfileDetailsService, private message: NzMessageService, private router:Router){
     this.changePasswordForm = this.fb.group({
       currentPassword: new FormControl(''),
       newPassword: new FormControl(''),
@@ -93,8 +94,11 @@ export class ProfileDetailsComponent {
       new_password:form.newPassword
     }
     this.profilesService.passwordChange(payload).subscribe((response:any)=>{
-      console.log(response);
-      this.message.success('Password changed successfully');
+      if(response.message){
+        localStorage.clear();
+        this.router.navigate(['']);
+        this.message.success(response.message);
+      }
     })
   }
 }

@@ -1,4 +1,15 @@
-<nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+<nz-table #basicTable
+nzBordered
+[nzData]="usersList"
+[nzFrontPagination]="false"
+[nzTotal]="totalItems"
+[nzPageSize]="itemsPerPage"
+[nzPageIndex]="page"
+(nzQueryParams)="onQueryParamsChange($event)"
+[nzShowTotal]="rangeTemplate"
+nzSize="small"
+nzTableLayout="fixed">
+<ng-template #rangeTemplate let-range="range" let-total> {{ range[0] }}-{{ range[1] }} of {{ total }} items </ng-template>
     <thead>
       <tr>
         <th *ngFor="let column of listOfColumn">
@@ -7,16 +18,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of sortTable.data">
-        <td>{{ data.firstName }}</td>
-        <td>{{ data.lastName }}</td>
-        <td>{{ data.email }}</td>
-        <td>{{ data.phoneNumber }}</td>
-        <td>{{ data.dob }}</td>
-        <td>{{ data.gender }}</td>
+      <tr *ngFor="let data of basicTable.data">
+        <td nzEllipsis [nzAlign]="'left'" [nzTooltipTitle]="data.first_name" nzTooltipPlacement="right" nz-button nz-tooltip>{{ data?.first_name }}</td>
+        <td nzEllipsis [nzAlign]="'left'" [nzTooltipTitle]="data.last_name" nzTooltipPlacement="right" nz-button nz-tooltip>{{ data.last_name }}</td>
+        <td nzEllipsis [nzAlign]="'left'" [nzTooltipTitle]="data.middle_name" nzTooltipPlacement="right" nz-button nz-tooltip>{{ data.middle_name }}</td>
+        <td nzEllipsis [nzAlign]="'left'" [nzTooltipTitle]="data.email_id" nzTooltipPlacement="right" nz-button nz-tooltip>{{ data.email_id }}</td>
+        <td nzEllipsis [nzAlign]="'left'" [nzTooltipTitle]="data.primary_phone_number" nzTooltipPlacement="right" nz-button nz-tooltip>{{ data.primary_phone_number }}</td>
+        <td nzEllipsis [nzAlign]="'left'" [nzTooltipTitle]="data.dob" nzTooltipPlacement="right" nz-button nz-tooltip>{{ data.dob }}</td>
         <td><nz-tag [nzColor]="data.status == 'Active' ? '#87d068' :'#f50'">{{ data.status }}</nz-tag>
         </td>
-        <td><a nz-button nzType="link" (click)="showModal()"><span nz-icon nzType="edit" nzTheme="outline"></span>Update</a> </td>
+        <td><a nz-button nzType="link" (click)="showModal(data.id)"><span nz-icon nzType="edit" nzTheme="outline"></span>Update</a> </td>
       </tr>
     </tbody>
   </nz-table>
@@ -32,7 +43,7 @@
                       <label nzFor="firstName">Full Name:</label>
                     </div>
                     <div class="col-lg-6">
-                      <span>Prem</span>
+                      <span>{{userDetails?.first_name+' '+userDetails?.last_name}}</span>
                     </div>
                   </div>
                 </div>
@@ -44,7 +55,7 @@
                       <label nzFor="firstName">Email:</label>
                     </div>
                     <div class="col-lg-6">
-                      <span>Prem</span>
+                      <span>{{userDetails?.email_id}}</span>
                     </div>
                   </div>  
                 </div>
@@ -56,7 +67,7 @@
                       <label nzFor="firstName">Phone Number:</label>
                     </div>
                     <div class="col-lg-6">
-                      <span>Prem</span>
+                      <span>{{userDetails?.primary_phone_number}}</span>
                     </div>
                   </div>
               </div>

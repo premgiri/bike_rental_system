@@ -1,30 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../services/admin.service';
-interface DataItem {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  dob:string;
-  gender:string;
-  status:string;
-}
-
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-manage-bike-owners',
   templateUrl: './manage-bike-owners.component.html',
   styleUrls: ['./manage-bike-owners.component.scss']
 })
 export class ManageBikeOwnersComponent implements OnInit{
+  isVisible:boolean = false;
+  selectedValue = '';
+  private selectedUserId:number = 0;
   public bikeOwnersList:any[] = [];
-  public usersList:any[] = [];
-  constructor(private adminService:AdminService){}
+  public userDetails:any;
+  public itemsPerPage = 10;
+  public totalItems = 0;
+  public page = 1;
+  constructor(private adminService:AdminService, private message:NzMessageService){}
   ngOnInit(): void {
       this.getAllBikeOwners();
-      this.getAllUsers();
   }
-  isVisible = false;
-  selectedValue = null;
   listOfColumn = [
     {
       title: 'First Name',
@@ -32,6 +27,10 @@ export class ManageBikeOwnersComponent implements OnInit{
     },
     {
       title: 'Last Name',
+      priority: 3
+    },
+    {
+      title: 'Middle Name',
       priority: 3
     },
     {
@@ -47,10 +46,6 @@ export class ManageBikeOwnersComponent implements OnInit{
       priority: 1
     },
     {
-      title: 'Gender',
-      priority: 1
-    },
-    {
       title: 'Status',
       priority: 1
     },
@@ -59,52 +54,28 @@ export class ManageBikeOwnersComponent implements OnInit{
       priority: 1
     }
   ];
-  listOfData: DataItem[] = [
-    {
-      firstName: 'John',
-      lastName: 'Brown',
-      email: 'gohn@gmail.com',
-      phoneNumber: '3243543543543',
-      dob:'20-11-2023',
-      gender:'Male',
-      status:'Active'
-    },
-    {
-      firstName: 'John',
-      lastName: 'Brown',
-      email: 'gohn@gmail.com',
-      phoneNumber: '3243543543543',
-      dob:'20-11-2023',
-      gender:'Male',
-      status:'Inactive'
-    },
-    {
-      firstName: 'John',
-      lastName: 'Brown',
-      email: 'gohn@gmail.com',
-      phoneNumber: '3243543543543',
-      dob:'20-11-2023',
-      gender:'Male',
-      status:'Active'
-    },
-    {
-      firstName: 'John',
-      lastName: 'Brown',
-      email: 'gohn@gmail.com',
-      phoneNumber: '3243543543543',
-      dob:'20-11-2023',
-      gender:'Male',
-      status:'Inactive'
-    },
-  ];
   
-  showModal(): void {
+  showModal(id:any): void {
+    this.selectedUserId = id;
+    this.adminService.getUserInfo(id).subscribe((response:any)=>{
+      this.userDetails = response;
+      this.selectedValue = response.status;
+      console.log(response);
+    })
     this.isVisible = true;
   }
 
   handleOk(): void {
+    const payload = {
+      id:this.selectedUserId,
+      status: this.selectedValue
+    }
+    this.adminService.updateSUsertatus(payload).subscribe((response:any)=>{
+      this.message.create('success',response.message);
+      this.isVisible = false;
+      this.getAllBikeOwners();
+    })
     console.log('Button ok clicked!');
-    this.isVisible = false;
   }
 
   handleCancel(): void {
@@ -113,14 +84,31 @@ export class ManageBikeOwnersComponent implements OnInit{
   }
 
   getAllBikeOwners(){
-    this.adminService.getAllBikeOwners().subscribe((response:any)=>{
+    let object = {
+      pageSize: 10,
+      pageNumber: 0,
+    };
+    this.adminService.getAllBikeOwners(object).subscribe((response:any)=>{
       console.log(response);
+      this.bikeOwnersList = response.body.owners;
+      this.totalItems = response.body.total_count;
     })
   }
 
-  getAllUsers(){
-    this.adminService.getAllUserDetails().subscribe((response:any)=>{
-      console.log(response);
-    })
+  onQueryParamsChange(params: NzTableQueryParams): void {
+    const { pageSize, pageIndex, sort, filter } = params;
+    let object = {
+      pageSize: 10,
+      pageNumber: pageIndex - 1,
+    };
+    this.adminService.getAllBikeOwners(object).subscribe(response => {
+      try {
+        this.bikeOwnersList = response.body.owners;
+        this.totalItems = response.body.total_count;
+      //   this.isSpinning = false;
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 }

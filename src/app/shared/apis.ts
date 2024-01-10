@@ -9,8 +9,9 @@ export class ApiData {
     static readonly userDashboard = 'userDashboard';
     static readonly pastRides = 'userPreviousRides';
     static readonly currentBookings = 'userCurrentBooking';
-    static readonly changePassword = 'userCurrentBooking';
-
+    static readonly changePassword = 'ChangePassword';
+    static readonly updateStatus = 'updateUserStatus';
+    static readonly userInfo = 'UserInfo';
 
 
     static readonly firebaseLoginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCdctFxPpleBmE2I4jNGt4pe-slEIk62Nc';
