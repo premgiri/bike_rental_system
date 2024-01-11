@@ -16,8 +16,10 @@ export class UserDashboardComponent implements OnInit{
   public searchBikeKeyword:string = '';
   public searchedBikeList:any[] = [];
   public bikeDetails:any;
-  public dateFormat:string = 'yyyy-MM-dd';
+  public dateFormat:string = 'yyyy-MM-dd HH:mm';
   public selectedDateRangeForm:FormGroup = new FormGroup({});
+  public days:number = 0;
+  public totalFare:number = 0;
   
   constructor(private userService: UserService, private message: NzMessageService, private fb:FormBuilder){
     this.selectedDateRangeForm= this.fb.group({
@@ -25,6 +27,7 @@ export class UserDashboardComponent implements OnInit{
     })
   }
   ngOnInit(): void {
+    this.getAllBikes();
     this.getUserDashboard();
   }
 
@@ -43,12 +46,30 @@ export class UserDashboardComponent implements OnInit{
   }
 
   handleOk(): void {
+    const payload = {
+      customer_id: 0,
+      bike_owner_id: 0,
+      bike_id: 0,
+      ride_start_date: "2024-01-11T05:42:31.001Z",
+      ride_end_date: "2024-01-11T05:42:31.001Z",
+      days: 0,
+      amount_earned: 0
+    }
     this.isVisible = false;
+    this.userService.book(payload).subscribe((response:any)=>{
+
+    })
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
+  }
+
+  getAllBikes(){
+    this.userService.getAllBikes().subscribe((response:any)=>{
+      this.searchedBikeList = response;
+    })
   }
   onGetSearchedBikes(){
     this.userService.getSearchedBikes(this.searchBikeKeyword).subscribe((response:any)=>{
@@ -56,26 +77,38 @@ export class UserDashboardComponent implements OnInit{
       if(response.length > 0){
         this.searchedBikeList = response;
         this.message.success(response.length+' '+'bikes found');
+        this.searchBikeKeyword = '';
       }else if(response.length === 0){
+        this.searchedBikeList = [];
+        this.searchBikeKeyword = '';
         this.message.error('No bikes found')
       }
     })
   }
-  onDateSelected(){
-    const form = this.selectedDateRangeForm.value;
-    console.log(this.selectedDateRangeForm.controls['dateRange'].value);
-    form.dateRange.forEach((date:any,i:any) => {
-      let startDate:any;
-      let endDate:any;
-      if(date[i]===0){
-        startDate = new Date(date[i]);
-      }
-      if(date[i]===1){
-        endDate = new Date(date[i]);
-      }
-      const oneDay = 24 * 60 * 60 * 1000;
-      const remainingDays = Math.round(Math.abs((startDate - endDate) / oneDay));
-      console.log(remainingDays);
-    });
+  onDateSelected(dates:any){
+    const startDate = new Date(dates[0]);
+    const endDate = new Date(dates[1]);
+
+    // Check if the start and end dates are the same
+    if (startDate.toDateString() === endDate.toDateString()) {
+        this.days = 1;
+    } else {
+        // Calculate the time difference in milliseconds
+        const dateRange = endDate.getTime() - startDate.getTime();
+
+        // Convert the time difference to hours
+        const remainingHours = dateRange / (1000 * 3600);
+
+        // Always round up to the next whole day
+        const remainingDays = Math.ceil(remainingHours / 24);
+
+        this.days = remainingDays;
+    }
+
+    this.totalFare = this.bikeDetails.fare_per_day * this.days;
+  }
+
+  onOk(date:any){
+    console.log(date);
   }
 }

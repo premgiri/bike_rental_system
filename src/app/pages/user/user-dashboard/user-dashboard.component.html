@@ -10,14 +10,22 @@
     </nz-row>
 </section>
 
-  <section class="mt-5">
-    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-      <input type="text" nz-input placeholder="search bikes" [(ngModel)]="searchBikeKeyword"/>
-    </nz-input-group>
-    <ng-template #suffixIconButton>
-      <button nz-button nzType="primary" nzSearch (click)="onGetSearchedBikes()"><span nz-icon nzType="search"></span></button>
-    </ng-template>
-  </section>
+<div class="row mt-4">
+  <div class="col-lg-5">
+    <section>
+      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input type="text" nz-input placeholder="search by bike name" [(ngModel)]="searchBikeKeyword"/>
+      </nz-input-group>
+      <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch (click)="onGetSearchedBikes()"><span nz-icon nzType="search"></span></button>
+      </ng-template>
+    </section>
+  </div>
+  <div class="col-lg-1">
+    <button nz-button nzType="default" nzShape="circle"><span nz-icon nzType="reload"(click)="getAllBikes()" nzTooltipTitle="Refresh" nzTooltipPlacement="top" nz-button nz-tooltip></span></button>
+    <!-- <span nz-icon nzType="reload" nzTheme="outline" style="font-size: 20px;" (click)="getAllBikes()"></span> -->
+  </div>
+</div>
 
   <section class="mt-3">
     <nz-row [nzGutter]="24">
@@ -85,8 +93,8 @@
         <form [formGroup]="selectedDateRangeForm">
             <div>
               <div class="row">
-                <div class="col-lg-10">
-                  <nz-range-picker [nzFormat]="dateFormat"  (nzOnCalendarChange)="onDateSelected()" formControlName="dateRange"></nz-range-picker>
+                <div class="col-lg-12">
+                  <nz-range-picker [nzFormat]="dateFormat"  nzShowTime (nzOnOk)="onOk($event)" (ngModelChange)="onDateSelected($event)" formControlName="dateRange"></nz-range-picker>
                 </div>
                 <!-- <div class="col-lg-6">
                   <nz-form-item>
@@ -105,7 +113,7 @@
                   </nz-form-item >
                 </div> -->
               </div>
-              <div class="row">
+              <div class="row mt-2">
                 <div class="col-lg-10">
                   <div class="row">
                     <div class="col-lg-6">
@@ -124,7 +132,7 @@
                       <label nzFor="firstName">Days:</label>
                     </div>
                     <div class="col-lg-6">
-                      <span>Prem</span>
+                      <span>{{days}}</span>
                     </div>
                   </div>  
                 </div>
@@ -136,7 +144,7 @@
                       <label nzFor="firstName">Total Fare:</label>
                     </div>
                     <div class="col-lg-6">
-                      <span>Prem</span>
+                      <span>{{totalFare}}</span>
                     </div>
                   </div>
               </div>

@@ -13,6 +13,7 @@ export class UserService {
   private currentBookings = ApiData.currentBookings;
   private searchBikes = ApiData.searchUserBikes;
   private bikeDetails = ApiData.bikeDetails;
+  private bookRide = ApiData.bookRide;
   constructor(private http: HttpClient) { }
 
   getDashbooard(){
@@ -35,5 +36,13 @@ export class UserService {
 
   getBikeDetails(id:any){
     return this.http.get(`${this.apiRoot}/${this.bikeDetails}/${id}`);
+  }
+
+  book(rideDetails:any){
+    return this.http.post(`${this.apiRoot}/${this.bookRide}`,rideDetails);
+  }
+
+  getAllBikes(){
+    return this.http.post(`${this.apiRoot}/${this.searchBikes}`,'');
   }
 }

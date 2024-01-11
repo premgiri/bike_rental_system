@@ -17,6 +17,7 @@ export class ApiData {
     static readonly ownerBookings = 'RequestedRidesByOwnerId';
     static readonly searchUserBikes = 'Allbikes';
     static readonly bikeDetails = 'bikeDetails';
+    static readonly bookRide = 'bookRide';
 
 
     static readonly firebaseLoginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCdctFxPpleBmE2I4jNGt4pe-slEIk62Nc';
