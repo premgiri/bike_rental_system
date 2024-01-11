@@ -20,6 +20,8 @@ export class UserDashboardComponent implements OnInit{
   public selectedDateRangeForm:FormGroup = new FormGroup({});
   public days:number = 0;
   public totalFare:number = 0;
+  private startDate:any;
+  private endDate:any;
   
   constructor(private userService: UserService, private message: NzMessageService, private fb:FormBuilder){
     this.selectedDateRangeForm= this.fb.group({
@@ -47,17 +49,20 @@ export class UserDashboardComponent implements OnInit{
 
   handleOk(): void {
     const payload = {
-      customer_id: 0,
-      bike_owner_id: 0,
-      bike_id: 0,
-      ride_start_date: "2024-01-11T05:42:31.001Z",
-      ride_end_date: "2024-01-11T05:42:31.001Z",
-      days: 0,
-      amount_earned: 0
+      customer_id: Number(localStorage.getItem('id')),
+      bike_owner_id: Number(this.bikeDetails.owner_id),
+      bike_id: Number(this.bikeDetails.id),
+      ride_start_date: this.startDate.toISOString(),
+      ride_end_date: this.endDate.toISOString(),
+      days: Number(this.days),
+      amount_earned: Number(this.totalFare)
     }
     this.isVisible = false;
     this.userService.book(payload).subscribe((response:any)=>{
-
+      if(response.message){
+        this.message.success(response.message);
+      }
+      console.log(response);
     })
   }
 
@@ -88,6 +93,8 @@ export class UserDashboardComponent implements OnInit{
   onDateSelected(dates:any){
     const startDate = new Date(dates[0]);
     const endDate = new Date(dates[1]);
+    this.startDate = startDate;
+    this.endDate = endDate;
 
     // Check if the start and end dates are the same
     if (startDate.toDateString() === endDate.toDateString()) {

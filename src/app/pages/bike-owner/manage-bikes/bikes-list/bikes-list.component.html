@@ -1,9 +1,9 @@
 <nz-row [nzGutter]="24">
     <nz-col [nzSpan]="8" *ngFor="let bike of ownersBikesList">
-        <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis]">
+        <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis, showMoreEllipsis]">
             <div class="d-flex justify-content-between mb-3">
                 <b>{{bike.bike_details.name}}</b>
-                <a nz-button nzType="link" (click)="isViewBikeDetails = !isViewBikeDetails">Collapse<span nz-icon [nzType]="isViewBikeDetails ? 'down' : 'up'"></span></a>
+                <nz-tag [nzColor]="bike.bike_details.status === 1 ? '#87d068' :'#f50'">{{bike.bike_details.status === 1 ? 'Active' : 'Inactive'}}</nz-tag>
             </div>
             <nz-card-meta
               [nzDescription]="cardContent"
@@ -41,18 +41,42 @@
                 </nz-col>
                 <nz-col [nzSpan]="16">
                     <!-- <nz-tag [nzColor]="'#87d068'">Active</nz-tag> -->
-                    <nz-tag [nzColor]="bike.bike_details.status === 1 ? '#87d068' :'#f50'">{{bike.bike_details.status === 1 ? 'Active' : 'Inactive'}}</nz-tag>
+                    <nz-tag [nzColor]="getStatusColor(bike.bike_details.status)">{{getBikeStatus(bike.bike_details.status)}}</nz-tag>
                 </nz-col>
             </nz-row>
         </div>
           </ng-template>
           <ng-template #actionEllipsis>
-            <button nz-button nzType="primary" [routerLink]="'/previous-rides'">Previous Rides</button>
+            <button nz-button nzType="primary" [routerLink]="'/previous-rides/' + bike?.bike_details?.id">Previous Rides</button>
           </ng-template>
+          <ng-template #showMoreEllipsis>
+            <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="click">Show more details</a>
+        </ng-template>
           <ng-template #coverTemplate>
             <img alt="example" [src]="'data:image/png;base64,' + bike.image" />
           </ng-template>
+          <ng-template #contentTemplate>
+            <div>
+              <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="12">
+                    <p>Registration Number:</p>
+                </nz-col>
+                <nz-col [nzSpan]="12">
+                    <p>{{bike.bike_details.registration_number}}</p>
+                </nz-col>
+            </nz-row>
+            <nz-row [nzGutter]="24">
+                <nz-col [nzSpan]="12">
+                    <p>Price:</p>
+                </nz-col>
+                <nz-col [nzSpan]="12">
+                    <p>{{bike.bike_details.fare_per_day}}</p>
+                </nz-col>
+            </nz-row>
+            </div>
+          </ng-template>
     </nz-col>
 </nz-row>
-
-  
+  <!-- <button nz-button nz-popover nzPopoverTitle="Title" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="click">
+    Click me
+  </button> -->

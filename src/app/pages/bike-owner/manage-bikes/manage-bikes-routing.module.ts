@@ -21,7 +21,7 @@ const routes: Routes = [
     },
   },
   {
-    path:'previous-rides',
+    path:'previous-rides/:id',
     component:PreviousRidesComponent,
     data: {
       breadcrumb: 'Previous Rides',

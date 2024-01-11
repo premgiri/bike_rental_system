@@ -42,12 +42,15 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzListModule } from 'ng-zorro-antd/list';
+
 
 
 @NgModule({
   imports: [],
   exports: [
     NzLayoutModule,
+    NzListModule,
     NzStatisticModule,
     NgApexchartsModule,
     NzBackTopModule,

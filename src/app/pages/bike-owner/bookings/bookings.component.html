@@ -1,9 +1,9 @@
 <nz-row [nzGutter]="24">
-    <nz-col [nzSpan]="12">
-        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisReject,actionEllipsisAaccept]">
+    <nz-col [nzSpan]="12" *ngFor="let booking of bookingDetails">
+        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisReject,actionEllipsisAaccept, viewMoreDetails]">
             <div class="d-flex justify-content-between mb-3">
-                <b>Royal Enfield</b>
-                <a nz-button nzType="link" (click)="isViewBikeDetails = !isViewBikeDetails">Collapse<span nz-icon [nzType]="isViewBikeDetails ? 'down' : 'up'"></span></a>
+                <b>{{booking?.ride_details?.bike.name}}</b>
+                <!-- <a nz-button nzType="link" (click)="isViewBikeDetails = !isViewBikeDetails">Collapse<span nz-icon [nzType]="isViewBikeDetails ? 'down' : 'up'"></span></a> -->
             </div>
             <nz-card-meta
               [nzDescription]="cardContent"
@@ -26,7 +26,7 @@
                             <p>Registration Number:</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
-                            <p>TS120F7725</p>
+                            <p>{{booking?.ride_details?.bike?.registration_number}}</p>
                         </nz-col>
                     </nz-row>
                     <nz-row [nzGutter]="12">
@@ -34,7 +34,7 @@
                             <p>Price Per Day:</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
-                            <p>100$</p>
+                            <p>{{booking?.ride_details?.bike?.fare_per_day}}</p>
                         </nz-col>
                     </nz-row>
                     <nz-divider nzPlain nzText="Rider Details"></nz-divider>
@@ -43,7 +43,7 @@
                             <p>Csutomer Name:</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
-                            <p>Benz</p>
+                            <p>{{booking?.ride_details?.user?.first_name+' '+booking?.ride_details?.user?.last_name}}</p>
                         </nz-col>
                     </nz-row>
                     <nz-row [nzGutter]="24">
@@ -51,7 +51,7 @@
                             <p>Phone Number</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
-                            <p>Benz</p>
+                            <p>{{booking?.ride_details?.user?.primary_phone_number}}</p>
                         </nz-col>
                     </nz-row>
                     <nz-row [nzGutter]="24">
@@ -59,7 +59,7 @@
                             <p>Total Fare:</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
-                            <p>Benz</p>
+                            <p>{{booking?.ride_details?.amount_earned}}</p>
                         </nz-col>
                     </nz-row>
                     <nz-row [nzGutter]="24">
@@ -67,7 +67,7 @@
                             <p>Start Date:</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
-                            <p>Benz</p>
+                            <p>{{booking?.ride_details?.ride_start_date |  date:'yyyy-MM-dd'}}</p>
                         </nz-col>
                     </nz-row>
                     <nz-row [nzGutter]="24">
@@ -75,7 +75,7 @@
                             <p>End Date:</p>
                         </nz-col>
                         <nz-col [nzSpan]="16">
-                            <p>Benz</p>
+                            <p>{{booking?.ride_details?.ride_end_date |  date:'yyyy-MM-dd'}}</p>
                         </nz-col>
                     </nz-row>
                 </nz-col>
@@ -83,15 +83,105 @@
             </div>
           </ng-template>
           <ng-template #actionEllipsisAaccept>
-              <button nz-button nzType="primary">Accept Ride</button>
+              <button nz-button nzType="primary" (click)="onAcceptOrRejectRide(booking?.ride_details?.id,'Accepted')">Accept Ride</button>
             </ng-template>
             <ng-template #actionEllipsisReject>
-              <button nz-button nzType="primary" nzDanger>Reject Ride</button>
+              <button nz-button nzType="primary" nzDanger (click)="onAcceptOrRejectRide(booking?.ride_details?.id,'Rejected')">Reject Ride</button>
             </ng-template>
+            <ng-template #viewMoreDetails>
+                <a nz-button nzType="link" (click)="openDetails(booking)">Show more details</a>
+              </ng-template>
           <ng-template #coverTemplate>
-            <img alt="example" src="../../../../assets/images/RE.jpg" />
+            <img alt="example" [src]="'data:image/png;base64,' + booking.image" />
           </ng-template>
     </nz-col>
 </nz-row>
 
+
+
+<nz-drawer
+[nzClosable]="false"
+[nzOffsetX]="childrenVisible ? 180 : 0"
+[nzWidth]="320"
+[nzVisible]="visible"
+nzTitle="Bike Details"
+(nzOnClose)="closeDetails()"
+>
+<nz-row [nzGutter]="24" *nzDrawerContent>
+    <nz-col [nzSpan]="24">
+        <!-- <nz-row [nzGutter]="12">
+            <nz-col [nzSpan]="8">
+                <p>Bike Name:</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>Benz</p>
+            </nz-col>
+        </nz-row> -->
+        <nz-row [nzGutter]="12">
+            <nz-col [nzSpan]="8">
+                <p>Registration Number:</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>{{bikeDetails?.ride_details?.bike?.registration_number}}</p>
+            </nz-col>
+        </nz-row>
+        <nz-row [nzGutter]="12">
+            <nz-col [nzSpan]="8">
+                <p>Price Per Day:</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>{{bikeDetails?.ride_details?.bike?.fare_per_day}}</p>
+            </nz-col>
+        </nz-row>
+        <nz-divider nzPlain nzText="Rider Details"></nz-divider>
+        <nz-row [nzGutter]="12">
+            <nz-col [nzSpan]="8">
+                <p>Csutomer Name:</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>{{bikeDetails?.ride_details?.user?.first_name+' '+bikeDetails?.ride_details?.user?.last_name}}</p>
+            </nz-col>
+        </nz-row>
+        <nz-row [nzGutter]="24">
+            <nz-col [nzSpan]="8">
+                <p>Phone Number</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>{{bikeDetails?.ride_details?.user?.primary_phone_number}}</p>
+            </nz-col>
+        </nz-row>
+        <nz-row [nzGutter]="24">
+            <nz-col [nzSpan]="8">
+                <p>Total Fare:</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>{{bikeDetails?.ride_details?.amount_earned}}</p>
+            </nz-col>
+        </nz-row>
+        <nz-row [nzGutter]="24">
+            <nz-col [nzSpan]="8">
+                <p>Start Date:</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>{{bikeDetails?.ride_details?.ride_start_date |  date:'yyyy-MM-dd'}}</p>
+            </nz-col>
+        </nz-row>
+        <nz-row [nzGutter]="24">
+            <nz-col [nzSpan]="8">
+                <p>End Date:</p>
+            </nz-col>
+            <nz-col [nzSpan]="16">
+                <p>{{bikeDetails?.ride_details?.ride_end_date |  date:'yyyy-MM-dd'}}</p>
+            </nz-col>
+        </nz-row>
+    </nz-col>
+</nz-row>
+<nz-drawer [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food" (nzOnClose)="closeChildren()">
+    <nz-list *nzDrawerContent [nzRenderItem]="item">
+      <ng-template #item let-item>
+        <nz-list-item [nzContent]="item"></nz-list-item>
+      </ng-template>
+    </nz-list>
+  </nz-drawer>
+</nz-drawer>
   

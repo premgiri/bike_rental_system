@@ -20,4 +20,27 @@ export class BikesListComponent implements OnInit{
       this.ownersBikesList = response;
     })
   }
+
+  getBikeStatus(status:number):any{
+    if(status===1){
+      return 'Active';
+    }
+    if(status===2){
+      return 'Inactive';
+    }
+    if(status===3){
+      return 'Booked';
+    }
+  }
+  getStatusColor(status:number):any{
+    if(status===1){
+      return '#87d068';
+    }
+    if(status===2){
+      return '#f50';
+    }
+    if(status===3){
+      return 'green';
+    }
+  }
 }
