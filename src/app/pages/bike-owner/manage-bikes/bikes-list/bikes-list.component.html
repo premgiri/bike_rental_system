@@ -3,48 +3,16 @@
         <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis, showMoreEllipsis]">
             <div class="d-flex justify-content-between mb-3">
                 <b>{{bike.bike_details.name}}</b>
-                <nz-tag [nzColor]="bike.bike_details.status === 1 ? '#87d068' :'#f50'">{{bike.bike_details.status === 1 ? 'Active' : 'Inactive'}}</nz-tag>
+                <nz-tag [nzColor]="getStatusColor(bike.bike_details.status)">{{getBikeStatus(bike.bike_details.status)}}</nz-tag>
             </div>
             <nz-card-meta
               [nzDescription]="cardContent"
             ></nz-card-meta>
           </nz-card>
           <ng-template #cardContent>
-              <div *ngIf="isViewBikeDetails">
-            <!-- <nz-row [nzGutter]="12">
-                <nz-col [nzSpan]="8">
-                    <p>Bike Name:</p>
-                </nz-col>
-                <nz-col [nzSpan]="16">
-                    <p>Benzddddddddddd</p>
-                </nz-col>
-            </nz-row> -->
-            <nz-row [nzGutter]="12">
-                <nz-col [nzSpan]="8">
-                    <p>Registration Number:</p>
-                </nz-col>
-                <nz-col [nzSpan]="16">
-                    <p>{{bike.bike_details.registration_number}}</p>
-                </nz-col>
-            </nz-row>
-            <nz-row [nzGutter]="12">
-                <nz-col [nzSpan]="8">
-                    <p>Price:</p>
-                </nz-col>
-                <nz-col [nzSpan]="16">
-                    <p>{{bike.bike_details.fare_per_day}}</p>
-                </nz-col>
-            </nz-row>
-            <nz-row [nzGutter]="12">
-                <nz-col [nzSpan]="8">
-                    <p>Status:</p>
-                </nz-col>
-                <nz-col [nzSpan]="16">
-                    <!-- <nz-tag [nzColor]="'#87d068'">Active</nz-tag> -->
-                    <nz-tag [nzColor]="getStatusColor(bike.bike_details.status)">{{getBikeStatus(bike.bike_details.status)}}</nz-tag>
-                </nz-col>
-            </nz-row>
-        </div>
+          </ng-template>
+          <ng-template #actionEllipsis>
+            <button nz-button nzType="primary" [routerLink]="'/previous-rides/' + bike?.bike_details?.id">Previous Rides</button>
           </ng-template>
           <ng-template #actionEllipsis>
             <button nz-button nzType="primary" [routerLink]="'/previous-rides/' + bike?.bike_details?.id">Previous Rides</button>

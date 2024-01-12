@@ -12,7 +12,6 @@ export class BookingsComponent implements OnInit{
   public bookingDetails:any[] = [];
   visible = false;
   childrenVisible = false;
-  public bikeDetails:any;
   constructor(private bikeOwnerService:BikeOwnerService,private message:NzMessageService){}
   ngOnInit(): void {
     this.getBikeOwnerBookings();
@@ -22,17 +21,6 @@ export class BookingsComponent implements OnInit{
       console.log(response);
       this.bookingDetails = response;
     })
-  }
-  openDetails(bookingDetails:any){
-    this.visible = true;
-    console.log(bookingDetails);
-    this.bikeDetails = bookingDetails;
-  }
-  closeDetails(): void {
-    this.visible = false;
-  }
-  closeChildren(): void {
-    this.childrenVisible = false;
   }
   onAcceptOrRejectRide(rideId:any,rideStatus:string){
     const payload =  {
@@ -44,5 +32,19 @@ export class BookingsComponent implements OnInit{
         this.message.success(response.message);
       }
     })
+  }
+  getRideStatusColor(status:string):any{
+    if(status==='Requested'){
+      return '#f50';
+    }
+    if(status==='Accepted'){
+      return '#87d068';
+    }
+    if(status==='Completed'){
+      return 'green';
+    }
+    if(status==='Cancelled'){
+      return 'grey';
+    }
   }
 }

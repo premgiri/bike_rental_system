@@ -23,17 +23,6 @@ export class PreviousRidesComponent implements OnInit{
         console.log(response);
       });
   }
-  closeDetails(): void {
-    this.visible = false;
-  }
-  openDetails(bookingDetails:any){
-    this.visible = true;
-    console.log(bookingDetails);
-    this.selectedBikeDetails = bookingDetails;
-  }
-  closeChildren(): void {
-    this.childrenVisible = false;
-  }
   onAcceptOrRejectRide(rideId:any,rideStatus:string){
     const payload =  {
       id: rideId,

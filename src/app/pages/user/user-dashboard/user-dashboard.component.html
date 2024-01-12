@@ -29,59 +29,49 @@
 <nz-divider nzType="horizontal"></nz-divider>
   <section class="mt-3">
     <nz-row [nzGutter]="24">
-      <nz-col [nzSpan]="12" *ngFor="let bike of searchedBikeList">
-          <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisAaccept]">
+      <nz-col [nzSpan]="8" *ngFor="let bike of searchedBikeList">
+          <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisAaccept,showMoreExcllipses]">
             <div class="d-flex justify-content-between mb-3">
               <b>{{bike.bike_details.name}}</b>
-              <a nz-button nzType="link" (click)="isViewBikeDetails = !isViewBikeDetails">Collapse<span nz-icon [nzType]="isViewBikeDetails ? 'down' : 'up'"></span></a>
+              <nz-tag [nzColor]="getStatusColor(bike?.bike_details?.status)">{{getBikeStatus(bike?.bike_details?.status)}}</nz-tag>
+              <!-- <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="click">Show more details</a> -->
           </div>
-              <nz-card-meta
-                [nzDescription]="cardContent"
-              ></nz-card-meta>
             </nz-card>
-            <ng-template #cardContent>
-              <div *ngIf="isViewBikeDetails">
-              <nz-row [nzGutter]="24">
-                  <nz-col [nzSpan]="24">
-                      <!-- <nz-row [nzGutter]="12">
-                          <nz-col [nzSpan]="8">
-                              <p>Bike Name:</p>
-                          </nz-col>
-                          <nz-col [nzSpan]="16">
-                              <p>Benz</p>
-                          </nz-col>
-                      </nz-row> -->
-                      <nz-row [nzGutter]="12">
-                          <nz-col [nzSpan]="8">
+            <ng-template #actionEllipsisAaccept>
+                <button nz-button nzType="primary" (click)="showModal(bike.bike_details.id)">Book Ride</button>
+              </ng-template>
+              <ng-template #showMoreExcllipses>
+                <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">Show more details</a>
+              </ng-template>
+
+            <ng-template #coverTemplate>
+              <img alt="example" [src]="'data:image/png;base64,' + bike.image" />
+            </ng-template>
+            <ng-template #contentTemplate>
+              <div>
+                      <nz-row [nzGutter]="24">
+                          <nz-col [nzSpan]="12">
                               <p>Registration Number:</p>
                           </nz-col>
-                          <nz-col [nzSpan]="16">
+                          <nz-col [nzSpan]="12">
                               <p>{{bike.bike_details.registration_number}}</p>
                           </nz-col>
                       </nz-row>
-                      <nz-row [nzGutter]="12">
-                          <nz-col [nzSpan]="8">
+                      <nz-row [nzGutter]="24">
+                          <nz-col [nzSpan]="12">
                               <p>Price Per Day:</p>
                           </nz-col>
-                          <nz-col [nzSpan]="16">
+                          <nz-col [nzSpan]="12">
                               <p>{{bike.bike_details.fare_per_day}}</p>
                           </nz-col>
                       </nz-row>
                       <nz-divider nzPlain nzText="Pickup Location"></nz-divider>
                       <nz-row [nzGutter]="24">
-                        <nz-col [nzSpan]="24  ">
+                        <nz-col [nzSpan]="24">
                           <p>{{bike.bike_details.addressline1+','+ bike.bike_details.addressline2 +','+ bike.bike_details.city +','+ bike.bike_details.state +','+ bike.bike_details.country +'-'+ bike.bike_details.zipcode}}</p>
                         </nz-col>
                       </nz-row>
-                  </nz-col>
-              </nz-row>
               </div>
-            </ng-template>
-            <ng-template #actionEllipsisAaccept>
-                <button nz-button nzType="primary" (click)="showModal(bike.bike_details.id)">Book Ride</button>
-              </ng-template>
-            <ng-template #coverTemplate>
-              <img alt="example" [src]="'data:image/png;base64,' + bike.image" />
             </ng-template>
       </nz-col>
   </nz-row>  
