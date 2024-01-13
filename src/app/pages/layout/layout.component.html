@@ -81,7 +81,7 @@
           <span style="margin-right: 8px; color: #1890ff"
             >{{userFullName}}<span nz-icon nzType="down" nzTheme="outline" style="margin-left: 12px; font-size: 10px"></span>
           </span>
-          <nz-avatar style="background-color: #ff9800" [nzText]="'PG'" [nzSize]="32"></nz-avatar>
+          <nz-avatar style="background-color: #ff9800" [nzText]="userFullName" [nzSize]="32"></nz-avatar>
           <ng-template #contentTemplate>
             <div class="profile-items">
               <li [routerLink]="'/profile-details'"><span nz-icon nzType="user" nzTheme="outline"></span>User Profile</li>
