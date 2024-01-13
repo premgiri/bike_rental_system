@@ -39,61 +39,46 @@
                       </nz-upload> -->
                     </div>
                     <div class="col-lg-3">
-                      <h4>Prem Giri</h4>
-                      <p class="mb-0">prem@prutech.com</p>
-                      <div class="text-muted"><small>Last seen 2 hours ago</small></div>
-                      <div class="mt-2">
+                      <h4>{{userDetails?.first_name+' '+userDetails?.last_name}}</h4>
+                      <p class="pr-2"><span nz-icon nzType="mail" nzTheme="outline"></span>{{userDetails?.email_id}}</p>
+                      <p><span nz-icon nzType="phone" nzTheme="outline"></span>{{userDetails?.primary_phone_number}}</p>
+                      <!-- <div class="text-muted"><small>Last seen 2 hours ago</small></div> -->
+                      <!-- <div class="mt-2">
                         <button nz-button nzType="primary" (click)="showModal()">
                           <span nz-icon nzType="camera" nzTheme="outline"></span>
                           Change Photo
                         </button>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="col-lg-6">
                       <div class="d-flex justify-content-end">
                         <div>
                           <nz-tag [nzColor]="'grey'">administrator</nz-tag>
-                          <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                          <!-- <div class="text-muted"><small>Joined 09 Dec 2017</small></div> -->
                         </div>
-                        <!-- <div class="text-center text-sm-left mb-2 mb-sm-0">
-                          <h4>Prem Giri</h4>
-                          <p class="mb-0">prem@prutech.com</p>
-                          <div class="text-muted"><small>Last seen 2 hours ago</small></div>
-                          <div class="mt-2">
-                            <button nz-button nzType="primary" (click)="showModal()">
-                              <span nz-icon nzType="camera" nzTheme="outline"></span>                          
-                              Change Photo
-                            </button>
-                          </div>
-                        </div> -->
-                        <!-- <div class="text-center text-sm-right">
-                          <nz-tag [nzColor]="'grey'">administrator</nz-tag>
-                          <span class="badge badge-secondary">administrator</span>
-                          <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
-                        </div> -->
                       </div>
                     </div>
                   </div>
                   <nz-tabset nzType="card">
                     <nz-tab nzTitle="Profile">
-                      <form>
+                      <form [formGroup]="profileDetailsForm">
                         <div class="row">
                           <div class="col-lg-4">
                             <nz-form-item>
                               <nz-form-label nzFor="fullName">Fist Name</nz-form-label>
-                              <input nz-input />
+                              <input nz-input formControlName="first_name"/>
                             </nz-form-item>
                           </div>
                           <div class="col-lg-4">
                             <nz-form-item>
                               <nz-form-label nzFor="email">Middle Name</nz-form-label>
-                              <input nz-input />
+                              <input nz-input formControlName="middle_name"/>
                             </nz-form-item>
                           </div>
                           <div class="col-lg-4">
                             <nz-form-item>
                               <nz-form-label nzFor="email">Last Name</nz-form-label>
-                              <input nz-input />
+                              <input nz-input formControlName="last_name"/>
                             </nz-form-item>
                           </div>
                         </div>
@@ -101,35 +86,35 @@
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="fullName">Email</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="email_id"/>
                               </nz-form-item>
                             </div>
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="email">Phone Number</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="primary_phone_number"/>
                               </nz-form-item>
                             </div>
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="email">Alternate Phone Number</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="secondary_phone_number"/>
                               </nz-form-item>
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-lg-4">
+                            <!-- <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="fullName">Gender</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="gender"/>
                               </nz-form-item>
-                            </div>
+                            </div> -->
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-control>
                                     <nz-form-label>Date Of Birth</nz-form-label>
                                     <p>
-                                    <nz-date-picker nz-input nzFormat="dd-MM-yyyy" nzPlaceHolder="Select Date" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+                                    <nz-date-picker nz-input nzFormat="yyyy-MM-dd" nzPlaceHolder="Select Date" formControlName="dob"></nz-date-picker>
                                     <!-- <input nz-input /> -->
                                 </p>
                                 </nz-form-control>
@@ -147,19 +132,19 @@
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="fullName">Address Line1</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="addressline1"/>
                               </nz-form-item>
                             </div>
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="email">Address Line2</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="addressline2"/>
                               </nz-form-item>
                             </div>
                             <div class="col-lg-4">
                                 <nz-form-item>
                                   <nz-form-label nzFor="email">Country</nz-form-label>
-                                  <input nz-input />
+                                  <input nz-input formControlName="country"/>
                                 </nz-form-item>
                               </div>
                             <!-- <div class="col-lg-4">
@@ -173,19 +158,19 @@
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="fullName">State</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="state"/>
                               </nz-form-item>
                             </div>
                             <div class="col-lg-4">
                               <nz-form-item>
                                 <nz-form-label nzFor="email">City</nz-form-label>
-                                <input nz-input />
+                                <input nz-input formControlName="city"/>
                               </nz-form-item>
                             </div>
                             <div class="col-lg-4">
                                 <nz-form-item>
                                   <nz-form-label nzFor="email">Zip Code</nz-form-label>
-                                  <input nz-input />
+                                  <input nz-input formControlName="zipcode"/>
                                 </nz-form-item>
                               </div>
                             <!-- <div class="col-lg-4">
@@ -256,7 +241,7 @@
                               </div> -->
                         <div class="row">
                           <div class="col d-flex justify-content-end">
-                            <button nz-button nzType="primary">Save Changes</button>
+                            <button nz-button nzType="primary" (click)="onChangesProfileDetails()">Save Changes</button>
                           </div>
                         </div>
                       </form>

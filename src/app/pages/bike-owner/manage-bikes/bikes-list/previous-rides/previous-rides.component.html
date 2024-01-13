@@ -1,6 +1,6 @@
 <nz-row [nzGutter]="24">
     <nz-col [nzSpan]="12" *ngFor="let bike of bikeDetails">
-        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisReject,actionEllipsisAaccept,showMoreDetails]">
+        <nz-card style="width:400px;margin-top: 20px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisReject,actionEllipsisAaccept,showMoreDetails]">
             <div class="d-flex justify-content-between mb-3">
                 <b>{{bike?.ride_details?.bike?.name}}</b>
                 <nz-tag [nzColor]="bike.status == 'Accepted' ? '#87d068' :'#f50'">{{ bike.status }}</nz-tag>
@@ -19,7 +19,7 @@
               <button nz-button nzType="primary" nzDanger (click)="onAcceptOrRejectRide(bike?.ride_details?.id,'Rejected')">Reject Ride</button>
             </ng-template>
             <ng-template #showMoreDetails>
-                <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="click">Show more details</a>
+                <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">Show more details</a>
             </ng-template>
             <ng-template #contentTemplate>
                 <div>
@@ -36,7 +36,7 @@
                                     <p>Price Per Day:</p>
                                 </nz-col>
                                 <nz-col [nzSpan]="12">
-                                    <p>{{bike?.ride_details?.bike?.fare_per_day}}</p>
+                                    <p>{{bike?.ride_details?.bike?.fare_per_day}}$</p>
                                 </nz-col>
                             </nz-row>
                             <nz-divider nzPlain nzText="Rider Details"></nz-divider>
@@ -45,7 +45,7 @@
                                     <p>Total Fare:</p>
                                 </nz-col>
                                 <nz-col [nzSpan]="12">
-                                    <p>{{bike?.ride_details?.amount_earned}}</p>
+                                    <p>{{bike?.ride_details?.amount_earned}}$</p>
                                 </nz-col>
                             </nz-row>
                             <nz-row [nzGutter]="24">

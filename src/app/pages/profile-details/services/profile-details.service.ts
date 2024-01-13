@@ -9,9 +9,18 @@ export class ProfileDetailsService {
   private readonly apiRoot: string = environment.apiBase;
 
   private changePassword = ApiData.changePassword;
+  private userInfo = ApiData.userInfo;
+  private changeProfileDetails = ApiData.changesProfileDetails;
+
   constructor(private http: HttpClient) { }
 
   passwordChange(passwordDetails:any){
     return this.http.post(`${this.apiRoot}/${this.changePassword}`,passwordDetails);
+  }
+  getUserInfo(id:any){
+    return this.http.get(`${this.apiRoot}/${this.userInfo}/${id}`);
+  }
+  changeProfile(profileDetails:any){
+    return this.http.put(`${this.apiRoot}/${this.changeProfileDetails}`,profileDetails);
   }
 }

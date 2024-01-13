@@ -14,6 +14,8 @@ export class UserService {
   private searchBikes = ApiData.searchUserBikes;
   private bikeDetails = ApiData.bikeDetails;
   private bookRide = ApiData.bookRide;
+  private acceptRejectRide = ApiData.acceptOrRejectRide;
+
   constructor(private http: HttpClient) { }
 
   getDashbooard(){
@@ -44,5 +46,9 @@ export class UserService {
 
   getAllBikes(){
     return this.http.post(`${this.apiRoot}/${this.searchBikes}`,'');
+  }
+
+  acceptOrRejectRide(rideDetails:any){
+    return this.http.post(`${this.apiRoot}/${this.acceptRejectRide}`,rideDetails);
   }
 }

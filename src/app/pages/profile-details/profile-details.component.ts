@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
@@ -10,20 +10,44 @@ import { Router } from '@angular/router';
   templateUrl: './profile-details.component.html',
   styleUrls: ['./profile-details.component.scss']
 })
-export class ProfileDetailsComponent {
+export class ProfileDetailsComponent implements OnInit{
   loading = false;
   avatarUrl?: string;
   currentPasswordVisible = false;
   newPasswordVisible = false;
   confirmPasswordVisible = false;
   isVisible = false;
-  date = null;
-  changePasswordForm:FormGroup = new FormGroup({})
+  public userDetails:any;
+  private userId:any = localStorage.getItem('id');
+  changePasswordForm:FormGroup = new FormGroup({});
+  profileDetailsForm:FormGroup = new FormGroup({});
   constructor(private fb:FormBuilder, private profilesService: ProfileDetailsService, private message: NzMessageService, private router:Router){
     this.changePasswordForm = this.fb.group({
       currentPassword: new FormControl(''),
       newPassword: new FormControl(''),
       confirmPassword: new FormControl('')
+    })
+    this.profileDetailsForm = this.fb.group({
+      id: Number(this.userId),
+      first_name: new FormControl(""),
+      middle_name: new FormControl(""),
+      last_name: new FormControl(""),
+      email_id: new FormControl(),
+      primary_phone_number: new FormControl(""),
+      secondary_phone_number: new FormControl(""),
+      dob: new FormControl(""),
+      addressline1: new FormControl(""),
+      addressline2: new FormControl(""),
+      country: new FormControl(""),
+      state: new FormControl(""),
+      city: new FormControl(""),
+      zipcode: new FormControl(""),
+    });
+  }
+  ngOnInit(): void {
+    this.profilesService.getUserInfo(this.userId).subscribe((response:any)=>{
+      this.userDetails = response;
+      this.profileDetailsForm.patchValue(this.userDetails);
     })
   }
   beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
@@ -82,11 +106,6 @@ export class ProfileDetailsComponent {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
-
-  onChange(result: Date): void {
-    console.log('onChange: ', result);
-  }
-
   onChangePssword(){
     const form = this.changePasswordForm.value;
     const payload = {
@@ -99,6 +118,12 @@ export class ProfileDetailsComponent {
         this.router.navigate(['']);
         this.message.success(response.message);
       }
+    })
+  }
+  onChangesProfileDetails(){
+    this.profilesService.changeProfile(this.profileDetailsForm.value).subscribe((response:any)=>{
+      this.message.success(response.message);
+      console.log(response);
     })
   }
 }

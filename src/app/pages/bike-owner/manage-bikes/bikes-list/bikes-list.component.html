@@ -1,7 +1,7 @@
 <nz-row [nzGutter]="24">
     <nz-col [nzSpan]="8" *ngFor="let bike of ownersBikesList">
-        <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis, showMoreEllipsis]">
-            <div class="d-flex justify-content-between mb-3">
+        <nz-card style="width:300px; margin-top: 20px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis, showMoreEllipsis]">
+            <div class="d-flex justify-content-between mb-2">
                 <b>{{bike.bike_details.name}}</b>
                 <nz-tag [nzColor]="getStatusColor(bike.bike_details.status)">{{getBikeStatus(bike.bike_details.status)}}</nz-tag>
             </div>
@@ -18,7 +18,7 @@
             <button nz-button nzType="primary" [routerLink]="'/previous-rides/' + bike?.bike_details?.id">Previous Rides</button>
           </ng-template>
           <ng-template #showMoreEllipsis>
-            <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="click">Show more details</a>
+            <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">Show more details</a>
         </ng-template>
           <ng-template #coverTemplate>
             <img alt="example" [src]="'data:image/png;base64,' + bike.image" />
@@ -38,7 +38,7 @@
                     <p>Price:</p>
                 </nz-col>
                 <nz-col [nzSpan]="12">
-                    <p>{{bike.bike_details.fare_per_day}}</p>
+                    <p>{{bike.bike_details.fare_per_day}}$</p>
                 </nz-col>
             </nz-row>
             </div>

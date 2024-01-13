@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-current-bookings',
@@ -9,7 +10,10 @@ import { UserService } from '../services/user.service';
 export class CurrentBookingsComponent implements OnInit{
   isVisible = false;
   isViewBikeDetails:boolean = false;
-  constructor(private usersService:UserService){}
+  public bookingDetails:any[] =[];
+  private rideId:number = 0;
+  private rideStatus:string = '';
+  constructor(private usersService:UserService, private message: NzMessageService){}
   ngOnInit(): void {
     this.getCurrentBookings();
 }
@@ -18,8 +22,8 @@ export class CurrentBookingsComponent implements OnInit{
     this.isVisible = true;
   }
 
-  handleOk(): void {
-    console.log('Button ok clicked!');
+  handleOk(rideId:any,rideStatus:string): void {
+    this.onAcceptOrRejectRide(rideId,rideStatus);
     this.isVisible = false;
   }
 
@@ -30,7 +34,33 @@ export class CurrentBookingsComponent implements OnInit{
 
   getCurrentBookings(){
     this.usersService.getCurrentBookings().subscribe((response:any)=>{
+      this.bookingDetails = response;
       console.log(response);
+    })
+  }
+  getRideStatusColor(status:string):any{
+    if(status==='Requested'){
+      return '#f50';
+    }
+    if(status==='Accepted'){
+      return '#87d068';
+    }
+    if(status==='Completed'){
+      return 'green';
+    }
+    if(status==='Cancelled'){
+      return 'grey';
+    }
+  }
+  onAcceptOrRejectRide(rideId:any,rideStatus:string){
+    const payload =  {
+      id: rideId,
+      status: rideStatus
+    }
+    this.usersService.acceptOrRejectRide(payload).subscribe((response:any)=>{
+      if(response.message){
+        this.message.success(response.message);
+      }
     })
   }
 }

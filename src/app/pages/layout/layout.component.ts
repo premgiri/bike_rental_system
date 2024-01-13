@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { Router } from '@angular/router';
+import { ProfileDetailsService } from '../profile-details/services/profile-details.service';
 
 
 @Component({
@@ -13,10 +14,15 @@ export class LayoutComponent implements OnInit{
   isCollapsedNav = false;
   menuItems:any;
   visible: boolean = false;
-  constructor(private ngxPermission: NgxPermissionsService, private router:Router){}
+  public userId:any = localStorage.getItem('id');
+  public userFullName:string = "";
+  constructor(private ngxPermission: NgxPermissionsService, private router:Router, private profileDetailsService:ProfileDetailsService){}
 
   ngOnInit(): void {
     const roles = JSON.parse(localStorage.getItem('roles') || '[]');
+    this.profileDetailsService.getUserInfo(this.userId).subscribe((response:any)=>{
+      this.userFullName = response.first_name+' '+response.last_name;
+    })
 
     // Load the permissions array using ngxPermissionsService
     this.ngxPermission.loadPermissions(roles);
