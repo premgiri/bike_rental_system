@@ -43,6 +43,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 
 
@@ -57,6 +58,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
     NzMenuModule,
     NzBreadCrumbModule,
     NzPageHeaderModule,
+    NzImageModule,
     NzCollapseModule,
     FormsModule,
     NzDatePickerModule,

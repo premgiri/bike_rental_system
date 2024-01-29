@@ -21,7 +21,7 @@
             <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">Show more details</a>
         </ng-template>
           <ng-template #coverTemplate>
-            <img alt="example" [src]="'data:image/png;base64,' + bike.image" />
+            <img [nzSrc]="'data:image/png;base64,' + bike.image" [nzFallback]="'data:image/png;base64,' + bike.image" alt="" nz-image/>
           </ng-template>
           <ng-template #contentTemplate>
             <div>
