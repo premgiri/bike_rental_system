@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { BikeOwnerService } from '../../services/bike-owner.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-bike',
@@ -15,7 +16,7 @@ export class AddBikeComponent implements OnInit{
   private uploadedImageFile:any;
 
   addBikeForm:FormGroup = new FormGroup({});
-  constructor(private fb:FormBuilder, private bikeOwnerService: BikeOwnerService, private message: NzMessageService){
+  constructor(private fb:FormBuilder, private bikeOwnerService: BikeOwnerService, private message: NzMessageService, protected activatedRoute: ActivatedRoute,){
     this.addBikeForm = this.fb.group({
       vehicleName: new FormControl(''),
       hirePricePerDay: new FormControl(''),
@@ -30,8 +31,49 @@ export class AddBikeComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-
+    this.activatedRoute.data.subscribe((data:any)=>{
+      console.log(data.bikeDetails);
+      if(data.bikeDetails){
+        this.updateBike(data.bikeDetails);
+      }
+    })
   }
+  updateBike(bikeDetails:any){
+    this.addBikeForm.patchValue({
+      vehicleName:bikeDetails.bike_details.name,
+      hirePricePerDay: bikeDetails.bike_details.fare_per_day,
+      vehicleNummber: bikeDetails.bike_details.registration_number,
+      modelName: bikeDetails.bike_details.model,
+      address1: bikeDetails.bike_details.addressline1,
+      address2: bikeDetails.bike_details.addressline2,
+      country: bikeDetails.bike_details.country,
+      state: bikeDetails.bike_details.state,
+      city: bikeDetails.bike_details.city,
+      zipCode: bikeDetails.bike_details.zipcode
+    })
+
+    if (bikeDetails.image) {
+      // Decode the base64 string
+      const binaryString = atob(bikeDetails.image);
+      
+      // Convert the binary string to an array buffer
+      const buffer = new ArrayBuffer(binaryString.length);
+      const bufferView = new Uint8Array(buffer);
+      for (let i = 0; i < binaryString.length; i++) {
+        bufferView[i] = binaryString.charCodeAt(i);
+      }
+  
+      // Create a Blob object from the array buffer
+      const blob = new Blob([buffer], { type: "image/png" });
+  
+      // Set Blob to uploadedImageFile for further use
+      this.uploadedImageFile = blob;
+  
+      // Add Blob to imageFileList for display
+      this.imageFileList = [];
+      this.imageFileList.push({ uid: 'blob-' + this.imageFileList.length, name: 'Image', blob });
+    }
+}
   index = 'First-content';
 
   pre(): void {
@@ -64,6 +106,7 @@ export class AddBikeComponent implements OnInit{
     }
   }
   beforeUploadImage = (file: NzUploadFile): boolean => {
+    this.imageFileList = [];
     this.imageFileList = this.imageFileList.concat(file);
     // const formData = new FormData();
     this.imageFileList.forEach((file: any) => {

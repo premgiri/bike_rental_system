@@ -14,6 +14,8 @@ export class BikeOwnerService {
   private ownerBookings = ApiData.ownerBookings;
   private acceptRejectRide = ApiData.acceptOrRejectRide;
   private previousRides = ApiData.previousRides;
+  private bikeDetails = ApiData.bikeDetails;
+
   constructor(private http: HttpClient) { }
 
   getDashboard(){
@@ -38,5 +40,9 @@ export class BikeOwnerService {
 
   getPreviousRides(bikeId:any){
     return this.http.get(`${this.apiRoot}/${this.previousRides}/${bikeId}`);
+  }
+
+  getBikeDetails(id:any){
+    return this.http.get(`${this.apiRoot}/${this.bikeDetails}/${id}`);
   }
 }

@@ -1,6 +1,6 @@
 <nz-row [nzGutter]="24">
-    <nz-col [nzSpan]="8" *ngFor="let bike of ownersBikesList">
-        <nz-card style="width:300px; margin-top: 20px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis, showMoreEllipsis]">
+    <nz-col [nzSpan]="12" *ngFor="let bike of ownersBikesList">
+        <nz-card style="width:300px; margin-top: 20px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsis, actionEdit, showMoreEllipsis]">
             <div class="d-flex justify-content-between mb-2">
                 <b>{{bike.bike_details.name}}</b>
                 <nz-tag [nzColor]="getStatusColor(bike.bike_details.status)">{{getBikeStatus(bike.bike_details.status)}}</nz-tag>
@@ -14,11 +14,14 @@
           <ng-template #actionEllipsis>
             <button nz-button nzType="primary" [routerLink]="'/previous-rides/' + bike?.bike_details?.id">Previous Rides</button>
           </ng-template>
-          <ng-template #actionEllipsis>
-            <button nz-button nzType="primary" [routerLink]="'/previous-rides/' + bike?.bike_details?.id">Previous Rides</button>
+          <ng-template #actionEdit>
+            <span nz-icon nzType="edit" [routerLink]="'/edit-bike/'+bike?.bike_details?.id"></span>
           </ng-template>
+          <!-- <ng-template #actionEllipsis>
+            <button nz-button nzType="primary" [routerLink]="'/previous-rides/' + bike?.bike_details?.id">Previous Rides</button>
+          </ng-template> -->
           <ng-template #showMoreEllipsis>
-            <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">Show more details</a>
+            <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">Show more</a>
         </ng-template>
           <ng-template #coverTemplate>
             <img [nzSrc]="'data:image/png;base64,' + bike.image" [nzFallback]="'data:image/png;base64,' + bike.image" alt="" nz-image/>
