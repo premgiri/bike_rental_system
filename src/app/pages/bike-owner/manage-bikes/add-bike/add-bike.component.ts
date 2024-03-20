@@ -4,6 +4,7 @@ import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { BikeOwnerService } from '../../services/bike-owner.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
+import { NzImageService } from 'ng-zorro-antd/image';
 
 @Component({
   selector: 'app-add-bike',
@@ -14,9 +15,12 @@ export class AddBikeComponent implements OnInit{
   public current = 0;
   public imageFileList: NzUploadFile[] = [];
   private uploadedImageFile:any;
+  public isUpdateBike:boolean = false;
 
   addBikeForm:FormGroup = new FormGroup({});
-  constructor(private fb:FormBuilder, private bikeOwnerService: BikeOwnerService, private message: NzMessageService, protected activatedRoute: ActivatedRoute,){
+  scaleStep: number = 0.5;
+  imageUrl: any;
+  constructor(private nzImageService: NzImageService,private fb:FormBuilder, private bikeOwnerService: BikeOwnerService, private message: NzMessageService, protected activatedRoute: ActivatedRoute,){
     this.addBikeForm = this.fb.group({
       vehicleName: new FormControl(''),
       hirePricePerDay: new FormControl(''),
@@ -34,6 +38,7 @@ export class AddBikeComponent implements OnInit{
     this.activatedRoute.data.subscribe((data:any)=>{
       console.log(data.bikeDetails);
       if(data.bikeDetails){
+        this.isUpdateBike = true;
         this.updateBike(data.bikeDetails);
       }
     })
@@ -138,5 +143,58 @@ export class AddBikeComponent implements OnInit{
         this.message.success(response.message);
       }
     })
+  }
+  onUpdateBike(){
+    const form = this.addBikeForm.value;
+    const formData = new FormData();
+    const obj = {
+      name: form.vehicleName,
+      model: form.modelName,
+      owner_id: Number(localStorage.getItem('id')),
+      fare_per_day: Number(form.hirePricePerDay),
+      registration_number: form.vehicleNummber,
+      addressline1: form.address1,
+      addressline2: form.address2,
+      city: form.city,
+      state: form.state,
+      country: form.country,
+      zipcode: form.zipCode
+    }
+    formData.append('obj',JSON.stringify(obj));
+    formData.append('file',this.uploadedImageFile);
+    this.bikeOwnerService.updateBike(formData).subscribe((response:any)=>{
+      if(response.message){
+        this.message.success(response.message);
+      }
+    })
+  }
+  handleImage(blobData: Blob) {
+    if (blobData instanceof Blob) {
+      // It's a valid Blob object, you can do something with it
+      if (blobData.type.startsWith('image/')) {
+        // It's an image, you can display it
+        this.imageUrl = URL.createObjectURL(blobData);
+        // Now you can use the `imageUrl` to display the image in your UI
+        console.log("Image URL:", this.imageUrl);
+      } else {
+        // It's not an image, handle the error
+        console.error("Invalid image type:", blobData.type);
+      }
+    } else {
+      // It's not a Blob object, handle the error
+      console.error("Invalid Blob data:", blobData);
+    }
+  }
+  onClickPreview(){
+    const blobImage = this.imageFileList[0]['blob'];
+    this.handleImage(blobImage);
+    const images = [
+      {
+        src: this.imageUrl,
+        alt: ''
+      }
+    ];
+    this.nzImageService.preview(images, { nzZoom: 1, nzRotate: 0 });
+
   }
 }

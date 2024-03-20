@@ -21,6 +21,8 @@ export class ApiData {
     static readonly acceptOrRejectRide = 'acceptRejectRide/{id}';
     static readonly previousRides = 'RidesByBike';
     static readonly changesProfileDetails = 'UpdateUserDetails';
+    static readonly bikeDetailsUpdate = 'bikeDetailsUpdate';
+
 
     static readonly firebaseLoginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCdctFxPpleBmE2I4jNGt4pe-slEIk62Nc';
 }

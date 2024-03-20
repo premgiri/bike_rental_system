@@ -15,6 +15,8 @@ export class BikeOwnerService {
   private acceptRejectRide = ApiData.acceptOrRejectRide;
   private previousRides = ApiData.previousRides;
   private bikeDetails = ApiData.bikeDetails;
+  private bikeDetailsUpdate = ApiData.bikeDetailsUpdate;
+
 
   constructor(private http: HttpClient) { }
 
@@ -44,5 +46,9 @@ export class BikeOwnerService {
 
   getBikeDetails(id:any){
     return this.http.get(`${this.apiRoot}/${this.bikeDetails}/${id}`);
+  }
+
+  updateBike(bikeDetails:any){
+    return this.http.put(`${this.apiRoot}/${this.bikeDetailsUpdate}`,bikeDetails);
   }
 }
