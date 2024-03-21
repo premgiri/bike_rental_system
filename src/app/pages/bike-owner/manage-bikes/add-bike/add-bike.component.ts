@@ -16,6 +16,8 @@ export class AddBikeComponent implements OnInit{
   public imageFileList: NzUploadFile[] = [];
   private uploadedImageFile:any;
   public isUpdateBike:boolean = false;
+  private isFileChanged:boolean = false;
+  private bikeDetails:any;
 
   addBikeForm:FormGroup = new FormGroup({});
   scaleStep: number = 0.5;
@@ -36,8 +38,8 @@ export class AddBikeComponent implements OnInit{
   }
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((data:any)=>{
-      console.log(data.bikeDetails);
       if(data.bikeDetails){
+        this.bikeDetails = data.bikeDetails.bike_details;
         this.isUpdateBike = true;
         this.updateBike(data.bikeDetails);
       }
@@ -111,6 +113,7 @@ export class AddBikeComponent implements OnInit{
     }
   }
   beforeUploadImage = (file: NzUploadFile): boolean => {
+    this.isFileChanged = true;
     this.imageFileList = [];
     this.imageFileList = this.imageFileList.concat(file);
     // const formData = new FormData();
@@ -148,6 +151,7 @@ export class AddBikeComponent implements OnInit{
     const form = this.addBikeForm.value;
     const formData = new FormData();
     const obj = {
+      id:this.bikeDetails.id,
       name: form.vehicleName,
       model: form.modelName,
       owner_id: Number(localStorage.getItem('id')),
@@ -186,7 +190,13 @@ export class AddBikeComponent implements OnInit{
     }
   }
   onClickPreview(){
-    const blobImage = this.imageFileList[0]['blob'];
+    let blobImage;
+    if(this.isUpdateBike){
+      blobImage = this.imageFileList[0]['blob']
+    }
+    if(this.isFileChanged){
+      blobImage = this.imageFileList[0];
+    }
     this.handleImage(blobImage);
     const images = [
       {
@@ -195,6 +205,5 @@ export class AddBikeComponent implements OnInit{
       }
     ];
     this.nzImageService.preview(images, { nzZoom: 1, nzRotate: 0 });
-
   }
 }
