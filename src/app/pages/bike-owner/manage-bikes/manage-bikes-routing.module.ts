@@ -28,7 +28,7 @@ const routes: Routes = [
       bikeDetails: BikeDetailsRoutingResolveService,
     },
     data: {
-      breadcrumb: 'Add Bike',
+      breadcrumb: 'Update Bike',
     },
   },
   {
