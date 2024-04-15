@@ -22,7 +22,7 @@ export class BookingsComponent implements OnInit{
       this.bookingDetails = response;
     })
   }
-  onAcceptOrRejectRide(rideId:any,rideStatus:string){
+  onAcceptOrRejectOnGoingRide(rideId:any,rideStatus:string){
     const payload =  {
       id: rideId,
       status: rideStatus
@@ -30,6 +30,7 @@ export class BookingsComponent implements OnInit{
     this.bikeOwnerService.acceptOrRejectRide(payload).subscribe((response:any)=>{
       if(response.message){
         this.message.success(response.message);
+        this.getBikeOwnerBookings();
       }
     })
   }

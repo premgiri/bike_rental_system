@@ -5,6 +5,7 @@ import { BikeOwnerService } from '../../services/bike-owner.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
 import { NzImageService } from 'ng-zorro-antd/image';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-bike',
@@ -22,7 +23,7 @@ export class AddBikeComponent implements OnInit{
   addBikeForm:FormGroup = new FormGroup({});
   scaleStep: number = 0.5;
   imageUrl: any;
-  constructor(private nzImageService: NzImageService,private fb:FormBuilder, private bikeOwnerService: BikeOwnerService, private message: NzMessageService, protected activatedRoute: ActivatedRoute,){
+  constructor(private router:Router, private nzImageService: NzImageService,private fb:FormBuilder, private bikeOwnerService: BikeOwnerService, private message: NzMessageService, protected activatedRoute: ActivatedRoute,){
     this.addBikeForm = this.fb.group({
       vehicleName: new FormControl(''),
       hirePricePerDay: new FormControl(''),
@@ -143,6 +144,7 @@ export class AddBikeComponent implements OnInit{
     formData.append('file',this.uploadedImageFile);
     this.bikeOwnerService.addBike(formData).subscribe((response:any)=>{
       if(response.message){
+        this.router.navigate(['/bikes-list'])
         this.message.success(response.message);
       }
     })

@@ -1,6 +1,6 @@
 <nz-row [nzGutter]="24">
     <nz-col [nzSpan]="12" *ngFor="let booking of bookingDetails">
-        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisReject,showMoreExcllipses]">
+        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="booking?.status !== 'Ongoing' ? [actionEllipsisReject,showMoreExcllipses] : [showMoreExcllipses]">
             <div class="d-flex justify-content-between mb-2">
                 <b>{{booking?.ride_details?.bike?.name}}</b>
                 <nz-tag [nzColor]="getRideStatusColor(booking?.status)">{{booking?.status}}</nz-tag>

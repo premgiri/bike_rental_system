@@ -17,11 +17,13 @@ export class PreviousRidesComponent implements OnInit{
   childrenVisible = false;
   constructor(private bikeOwnerService:BikeOwnerService, private route:ActivatedRoute, private message:NzMessageService){}
   ngOnInit(): void {
+    this.onGetPreviousRides();
+  }
+  onGetPreviousRides(){
     const id = this.route.snapshot.paramMap.get('id');
-      this.bikeOwnerService.getPreviousRides(id).subscribe((response:any)=>{
-        this.bikeDetails = response;
-        console.log(response);
-      });
+    this.bikeOwnerService.getPreviousRides(id).subscribe((response:any)=>{
+      this.bikeDetails = response;
+    });
   }
   onAcceptOrRejectRide(rideId:any,rideStatus:string){
     const payload =  {
@@ -31,6 +33,7 @@ export class PreviousRidesComponent implements OnInit{
     this.bikeOwnerService.acceptOrRejectRide(payload).subscribe((response:any)=>{
       if(response.message){
         this.message.success(response.message);
+        this.onGetPreviousRides();
       }
     })
   }

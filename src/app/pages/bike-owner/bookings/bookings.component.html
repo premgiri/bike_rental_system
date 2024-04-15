@@ -1,6 +1,6 @@
 <nz-row [nzGutter]="24">
     <nz-col [nzSpan]="12" *ngFor="let booking of bookingDetails">
-        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionEllipsisReject,actionEllipsisAaccept, viewMoreDetails]">
+        <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="booking?.status !== 'Accepted' && booking?.status !== 'Ongoing' ? [actionEllipsisReject,actionEllipsisAaccept, viewMoreDetails] : booking?.status == 'Ongoing' ? [actionEllipsisEndRide, viewMoreDetails] : [actionEllipsisStartRide,viewMoreDetails]">
             <div class="d-flex justify-content-between mb-3">
                 <b>{{booking?.ride_details?.bike.name}}</b>
                 <nz-tag [nzColor]="getRideStatusColor(booking?.status)">{{booking?.status}}</nz-tag>
@@ -8,11 +8,17 @@
             </div>
           </nz-card>
           <ng-template #actionEllipsisAaccept>
-              <button nz-button nzType="primary" (click)="onAcceptOrRejectRide(booking?.ride_details?.id,'Accepted')">Accept Ride</button>
+              <button nz-button nzType="primary" (click)="onAcceptOrRejectOnGoingRide(booking?.ride_details?.id,'Accepted')">Accept Ride</button>
             </ng-template>
             <ng-template #actionEllipsisReject>
-              <button nz-button nzType="primary" nzDanger (click)="onAcceptOrRejectRide(booking?.ride_details?.id,'Rejected')">Reject Ride</button>
+              <button nz-button nzType="primary" nzDanger (click)="onAcceptOrRejectOnGoingRide(booking?.ride_details?.id,'Cancelled')">Reject Ride</button>
             </ng-template>
+            <ng-template #actionEllipsisStartRide>
+                <button nz-button nzType="primary" nzDanger (click)="onAcceptOrRejectOnGoingRide(booking?.ride_details?.id,'Ongoing')">Start Ride</button>
+              </ng-template>
+              <ng-template #actionEllipsisEndRide>
+                <button nz-button nzType="primary" nzDanger (click)="onAcceptOrRejectOnGoingRide(booking?.ride_details?.id,'Completed')">End Ride</button>
+              </ng-template>
             <ng-template #viewMoreDetails>
                 <a nz-button nzType="link" nz-button nz-popover nzPopoverTitle="Bike details" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">Show more details</a>
               </ng-template>
